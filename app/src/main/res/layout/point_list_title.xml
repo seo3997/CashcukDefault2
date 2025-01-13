@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_membership_sub_title"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/item_padding"
+        android:paddingTop="@dimen/item_padding">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/str_date"
+            android:textColor="@color/color_agreement"
+            android:textSize="@dimen/input_info_txt_size" />
+
+        <TextView
+            android:id="@+id/txt_point_list_content_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/str_content"
+            android:textColor="@color/color_agreement"
+            android:textSize="@dimen/input_info_txt_size" />
+
+        <TextView
+            android:id="@+id/txt_point_list_val_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/str_save_point_title"
+            android:textColor="@color/color_agreement"
+            android:textSize="@dimen/input_info_txt_size" />
+    </LinearLayout>
+</LinearLayout>

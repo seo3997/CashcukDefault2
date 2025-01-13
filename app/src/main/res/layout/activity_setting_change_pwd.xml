@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.cashcuk.MainTitleBar
+        android:id="@+id/main_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.cashcuk.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_bar"
+        android:orientation="vertical"
+        android:padding="@dimen/agreement_margin">
+
+        <!-- 현재 비밀번호 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/item_padding"
+                android:text="@string/str_now_pwd"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/tab_title_txt_size"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_margin_left"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="@drawable/number"
+                android:gravity="center"
+                android:paddingBottom="@dimen/item_margin_left"
+                android:paddingTop="@dimen/item_margin_left"
+                android:text="@string/str_pwd"
+                android:textColor="@color/color_main_friend_txt"
+                android:textSize="@dimen/login_find_txt_size"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/et_now_pwd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:background="@drawable/number2"
+                android:inputType="textPassword"
+                android:padding="@dimen/item_margin_left"
+                android:singleLine="true"
+                android:textColor="@color/color_input_point_request"
+                android:textSize="@dimen/login_find_txt_size" />
+        </LinearLayout>
+
+        <!-- 새로운 비밀번호 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/login_margin_top"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/item_padding"
+                android:text="@string/str_new_pwd"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/tab_title_txt_size"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_margin_left"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="@drawable/number"
+                android:gravity="center"
+                android:paddingBottom="@dimen/item_margin_left"
+                android:paddingTop="@dimen/item_margin_left"
+                android:text="@string/str_pwd"
+                android:textColor="@color/color_main_friend_txt"
+                android:textSize="@dimen/login_find_txt_size"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/et_new_pwd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:background="@drawable/number2"
+                android:inputType="textPassword"
+                android:hint="@string/str_membership_pwd"
+                android:padding="@dimen/item_margin_left"
+                android:singleLine="true"
+                android:textColor="@color/color_input_point_request"
+                android:textSize="@dimen/login_find_txt_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_margin_left"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="@drawable/number"
+                android:gravity="center"
+                android:text="@string/str_pwd_chk"
+                android:textColor="@color/color_main_friend_txt"
+                android:textSize="@dimen/login_find_txt_size"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/et_chk_new_pwd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:background="@drawable/number2"
+                android:inputType="textPassword"
+                android:padding="@dimen/item_margin_left"
+                android:singleLine="true"
+                android:textColor="@color/color_input_point_request"
+                android:textSize="@dimen/login_find_txt_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_change_pwd_ok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/agreement_margin"
+        android:background="@drawable/btn_membership_selector"
+        android:paddingBottom="@dimen/item_margin_left"
+        android:paddingTop="@dimen/item_margin_left"
+        android:text="@string/str_ok"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/input_info_txt_size" />
+</LinearLayout>

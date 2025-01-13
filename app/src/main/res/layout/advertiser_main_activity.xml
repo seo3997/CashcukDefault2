@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fl_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.cashcuk.MainTitleBar
+            android:id="@+id/main_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.cashcuk.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@drawable/bg2"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/item_margin_left"
+            android:paddingLeft="@dimen/agreement_margin"
+            android:paddingRight="@dimen/agreement_margin"
+            android:paddingTop="@dimen/agreement_margin">
+
+            <!-- 충전금 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/str_charge_money"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/my_cash_title_txt_size"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_charge_money"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="9"
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:text="0"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/etc_txt_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/item_padding"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="@string/str_won"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/login_txt_size"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:background="@drawable/bar4" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_padding"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:id="@+id/ll_charge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/item_padding"
+                    android:layout_weight="2"
+                    android:background="@drawable/btn_advertiser_main_selector"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/item_padding">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/icon1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/item_padding"
+                        android:text="@string/str_charge_request"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/authentication_txt_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_charge_details"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_padding"
+                    android:layout_weight="2"
+                    android:background="@drawable/btn_advertiser_main_selector"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/item_padding">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/icon2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/item_padding"
+                        android:text="@string/str_point_list"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/authentication_txt_size" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_change_point"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/agreement_margin"
+                android:background="@drawable/btn_membership_selector"
+                android:paddingBottom="@dimen/item_margin_left"
+                android:paddingTop="@dimen/item_margin_left"
+                android:text="@string/str_change_point"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/input_info_txt_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/agreement_margin"
+            android:layout_marginRight="@dimen/agreement_margin"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <!-- 총 광고비용 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/item_padding"
+                    android:paddingLeft="@dimen/item_margin_left"
+                    android:paddingRight="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_padding">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:text="@string/str_total_ad_cost"
+                        android:textColor="@color/color_main_friend_txt"
+                        android:textSize="@dimen/dlg_title_txt_size"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txt_total_ad_cost"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="9"
+                            android:background="@null"
+                            android:gravity="center_vertical|right"
+                            android:singleLine="true"
+                            android:text="0"
+                            android:textColor="@color/color_white"
+                            android:textSize="@dimen/my_use_ad_cash_txt_size"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/item_padding"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text="@string/str_won"
+                            android:textColor="@color/color_white"
+                            android:textSize="@dimen/authentication_txt_size" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_total_ad_cost_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:background="@drawable/btn_membership_selector"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_point_list"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/input_info_txt_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginLeft="@dimen/agreement_margin"
+                android:layout_marginRight="@dimen/agreement_margin"
+                android:background="@drawable/bar3" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_my_ad_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_membership_selector"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_my_ad_list"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/input_info_txt_size" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_all_push_state"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/item_padding"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_character_more_selector"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:text="@string/str_all_push_pressent_condition"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/login_txt_size" />
+
+                    <Button
+                        android:id="@+id/btn_make_ad"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/item_padding"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_character_more_selector"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:text="@string/str_make_ad"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/login_txt_size" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_progress_circle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/loading_intro_animation"
+            />
+    </LinearLayout>
+</FrameLayout>

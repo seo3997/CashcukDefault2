@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fl_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.cashcuk.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_bar"
+            android:layout_marginTop="@dimen/agreement_margin"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/agreement_margin"
+            android:paddingRight="@dimen/agreement_margin">
+
+            <!-- 카테고리 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/number"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_category"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/login_find_txt_size"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_category"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:background="@drawable/number2"
+                    android:padding="@dimen/item_margin_left">
+
+                    <TextView
+                        android:id="@+id/txt_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_input_point_request"
+                        android:textColorHint="@color/color_hint_txt"
+                        android:textSize="@dimen/tab_title_txt_size" />
+
+                    <ImageButton
+                        android:id="@+id/ib_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/item_padding"
+                        android:background="@null"
+                        android:src="@drawable/btn_category_arrow_selector" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!-- 명칭 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/number"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_title"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/login_find_txt_size"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/et_input_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:background="@drawable/number2"
+                    android:padding="@dimen/item_margin_left"
+                    android:singleLine="true"
+                    android:textColor="@color/color_input_point_request"
+                    android:textColorHint="@color/color_hint_txt"
+                    android:textSize="@dimen/tab_title_txt_size" />
+            </LinearLayout>
+
+            <!-- 회사명 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/number"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_sale_name"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/login_find_txt_size"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/et_input_sale_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:background="@drawable/number2"
+                    android:padding="@dimen/item_margin_left"
+                    android:singleLine="true"
+                    android:textColor="@color/color_input_point_request"
+                    android:textColorHint="@color/color_hint_txt"
+                    android:textSize="@dimen/tab_title_txt_size" />
+            </LinearLayout>
+
+            <!-- 공유인 ID -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/number"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_sale_id"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/login_find_txt_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_input_sale_id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:background="@drawable/number2"
+                    android:padding="@dimen/item_margin_left"
+                    android:singleLine="true"
+                    android:textColor="@color/color_input_point_request"
+                    android:textSize="@dimen/tab_title_txt_size" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_upload"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/item_margin_left"
+            android:layout_marginLeft="@dimen/agreement_margin"
+            android:layout_marginRight="@dimen/agreement_margin"
+            android:layout_marginTop="@dimen/item_margin_left"
+            android:background="@drawable/btn_membership_selector"
+            android:paddingBottom="@dimen/item_margin_left"
+            android:paddingTop="@dimen/item_margin_left"
+            android:text="@string/str_shared"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/input_info_txt_size" />.
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_progress_circle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/loading_intro_animation"
+            />
+    </LinearLayout>
+</FrameLayout>

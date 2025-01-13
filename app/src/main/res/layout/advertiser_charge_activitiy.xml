@@ -1,0 +1,975 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.cashcuk.MainTitleBar
+        android:id="@+id/main_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.cashcuk.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- 송금자 정보 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/top"
+                android:gravity="center"
+                android:paddingBottom="@dimen/item_margin_left"
+                android:paddingTop="@dimen/item_margin_left"
+                android:text="@string/str_remitter_info"
+                android:textColor="@color/color_my_point"
+                android:textSize="@dimen/authentication_txt_size"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shadow" />
+
+            <!-- 이메일 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/agreement_margin"
+                android:paddingRight="@dimen/agreement_margin">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/number"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_email"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/login_find_txt_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_remitter_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:background="@drawable/fixed2"
+                    android:padding="@dimen/item_margin_left"
+                    android:singleLine="true"
+                    android:textColor="@color/color_input_point_request"
+                    android:textSize="@dimen/login_find_txt_size" />
+            </LinearLayout>
+
+            <!-- 송금자명 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/agreement_margin"
+                android:paddingRight="@dimen/agreement_margin">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/number"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_remitter"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/login_find_txt_size"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/et_remitter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:background="@drawable/number2"
+                    android:padding="@dimen/item_margin_left"
+                    android:singleLine="true"
+                    android:textColor="@color/color_input_point_request"
+                    android:textSize="@dimen/login_find_txt_size" />
+            </LinearLayout>
+
+            <!-- 전화번호 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/agreement_margin"
+                android:paddingRight="@dimen/agreement_margin">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/number"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_representative_tel"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/login_find_txt_size"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_first_num"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/number2"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="3"
+                        android:padding="@dimen/item_margin_left"
+                        android:singleLine="true"
+                        android:textColor="@color/color_input_point_request"
+                        android:textSize="@dimen/login_find_txt_size" />
+
+                    <EditText
+                        android:id="@+id/et_middle_num"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/item_padding"
+                        android:layout_weight="1"
+                        android:background="@drawable/number3"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:padding="@dimen/item_margin_left"
+                        android:singleLine="true"
+                        android:textColor="@color/color_input_point_request"
+                        android:textSize="@dimen/login_find_txt_size" />
+
+                    <EditText
+                        android:id="@+id/et_last_num"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/item_padding"
+                        android:layout_weight="1"
+                        android:background="@drawable/number3"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:padding="@dimen/item_margin_left"
+                        android:singleLine="true"
+                        android:textColor="@color/color_input_point_request"
+                        android:textSize="@dimen/login_find_txt_size" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 사업자번호 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/agreement_margin"
+                android:paddingRight="@dimen/agreement_margin">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/number"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_businessman_registered_num"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/login_find_txt_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_businessman_registered_num"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:background="@drawable/fixed2"
+                    android:padding="@dimen/item_margin_left"
+                    android:singleLine="true"
+                    android:textColor="@color/color_input_point_request"
+                    android:textSize="@dimen/login_find_txt_size" />
+            </LinearLayout>
+
+            <!-- 기타메모 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/agreement_margin"
+                android:paddingRight="@dimen/agreement_margin">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/number"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_memo_etc"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/login_find_txt_size"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/et_memo_etc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:background="@drawable/number2"
+                    android:padding="@dimen/item_margin_left"
+                    android:singleLine="true"
+                    android:textColor="@color/color_input_point_request"
+                    android:textSize="@dimen/login_find_txt_size" />
+            </LinearLayout>
+
+            <!-- 입금 정보 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/login_margin_top"
+                android:background="@drawable/top"
+                android:gravity="center"
+                android:paddingBottom="@dimen/item_margin_left"
+                android:paddingTop="@dimen/item_margin_left"
+                android:text="@string/str_deposit_info"
+                android:textColor="@color/color_my_point"
+                android:textSize="@dimen/authentication_txt_size"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shadow" />
+
+            <!-- 예금주 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/agreement_margin"
+                android:paddingRight="@dimen/agreement_margin">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/number"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_account_holder"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/login_find_txt_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_account_holder"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:background="@drawable/fixed2"
+                    android:padding="@dimen/item_margin_left"
+                    android:singleLine="true"
+                    android:textColor="@color/color_input_point_request"
+                    android:textSize="@dimen/login_find_txt_size" />
+            </LinearLayout>
+
+            <!-- 입금은행 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/agreement_margin"
+                android:paddingRight="@dimen/agreement_margin">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/number"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_deposit_bank"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/login_find_txt_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_deposit_bank"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:background="@drawable/fixed2"
+                    android:padding="@dimen/item_margin_left"
+                    android:singleLine="true"
+                    android:textColor="@color/color_input_point_request"
+                    android:textSize="@dimen/login_find_txt_size" />
+            </LinearLayout>
+
+            <!-- 입금계좌 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/agreement_margin"
+                android:paddingRight="@dimen/agreement_margin">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/number"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_deposit_account"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/login_find_txt_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_deposit_account"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:background="@drawable/fixed2"
+                    android:padding="@dimen/item_margin_left"
+                    android:singleLine="true"
+                    android:textColor="@color/color_input_point_request"
+                    android:textSize="@dimen/login_find_txt_size" />
+            </LinearLayout>
+
+            <!-- 요청금액 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/agreement_margin"
+                android:paddingRight="@dimen/agreement_margin">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/number"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_charge_request_cost"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/login_find_txt_size"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:background="@drawable/number2"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/item_margin_left"
+                    android:paddingRight="@dimen/agreement_margin">
+
+                    <EditText
+                        android:id="@+id/et_charge_request_amount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="9"
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:inputType="number"
+                        android:maxLength="19"
+                        android:singleLine="true"
+                        android:textColor="@color/color_input_point_request"
+                        android:textSize="@dimen/login_find_txt_size" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/item_padding"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="@string/str_won"
+                        android:textColor="@color/color_input_point_request"
+                        android:textSize="@dimen/tab_title_txt_size" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 부가세 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/agreement_margin"
+                android:paddingRight="@dimen/agreement_margin">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/number"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_charge_request_vat"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/login_find_txt_size"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:background="@drawable/fixed2"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/item_margin_left"
+                    android:paddingRight="@dimen/agreement_margin">
+
+                    <TextView
+                        android:id="@+id/txt_charge_request_vat"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="9"
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:singleLine="true"
+                        android:textColor="@color/color_input_point_request"
+                        android:textSize="@dimen/login_find_txt_size" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/item_padding"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="@string/str_won"
+                        android:textColor="@color/color_input_point_request"
+                        android:textSize="@dimen/tab_title_txt_size" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 입금금액 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/agreement_margin"
+                android:paddingRight="@dimen/agreement_margin">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/number"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_receipts"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/login_find_txt_size"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:background="@drawable/fixed2"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/item_margin_left"
+                    android:paddingRight="@dimen/agreement_margin">
+
+                    <TextView
+                        android:id="@+id/txt_input_amount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="9"
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:singleLine="true"
+                        android:textColor="@color/color_input_point_request"
+                        android:textSize="@dimen/login_find_txt_size" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/item_padding"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="@string/str_won"
+                        android:textColor="@color/color_input_point_request"
+                        android:textSize="@dimen/tab_title_txt_size" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:paddingLeft="@dimen/agreement_margin"
+                android:paddingRight="@dimen/agreement_margin"
+                android:text="@string/str_vat_info"
+                android:textColor="@color/color_main_friend_txt"
+                android:textSize="@dimen/login_find_txt_size" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/item_margin_left"
+                android:layout_marginLeft="@dimen/agreement_margin"
+                android:layout_marginRight="@dimen/agreement_margin"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:background="@drawable/ad_item_bg"
+                android:paddingBottom="@dimen/item_margin_left"
+                android:paddingLeft="@dimen/item_padding"
+                android:paddingRight="@dimen/item_padding"
+                android:paddingTop="@dimen/item_margin_left">
+
+                <WebView
+                    android:id="@+id/wv_info_msg1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <CheckBox
+                android:id="@+id/chk_receipt_tax_invoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/agreement_margin"
+                android:layout_marginRight="@dimen/agreement_margin"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:background="@null"
+                android:button="@drawable/chk_receipt_selector"
+                android:paddingLeft="@dimen/item_margin_left"
+                android:text="@string/str_receipt_request" />
+
+            <!-- 현금영수증 / 세금계산서 -->
+            <LinearLayout
+                android:id="@+id/ll_receipt_tax_invoice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:background="@drawable/top"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingLeft="@dimen/agreement_margin"
+                    android:paddingRight="@dimen/agreement_margin"
+                    android:paddingTop="@dimen/item_margin_left">
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/rb_receipt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:button="@drawable/rb_chk_selector"
+                            android:paddingLeft="@dimen/item_padding"
+                            android:text="@string/str_receipt_cash"
+                            android:textColor="@color/color_my_point"
+                            android:textSize="@dimen/authentication_txt_size"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/color_white" />
+
+                        <RadioButton
+                            android:id="@+id/rb_tax_invoice"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/item_margin_left"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:button="@drawable/rb_chk_selector"
+                            android:paddingLeft="@dimen/item_padding"
+                            android:text="@string/str_tax_invoice"
+                            android:textColor="@color/color_my_point"
+                            android:textSize="@dimen/authentication_txt_size"
+                            android:textStyle="bold" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shadow" />
+
+                <!-- 현금영수증 -->
+                <RadioGroup
+                    android:id="@+id/rg_receipt_cash"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/agreement_margin"
+                    android:paddingRight="@dimen/agreement_margin"
+                    android:visibility="gone">
+
+                    <RadioButton
+                        android:id="@+id/rb_individual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:button="@drawable/rb_chk_selector"
+                        android:paddingLeft="@dimen/item_padding"
+                        android:text="@string/str_individual" />
+
+                    <!-- 이름 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/item_margin_left"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:background="@drawable/number"
+                            android:gravity="center"
+                            android:paddingBottom="@dimen/item_margin_left"
+                            android:paddingTop="@dimen/item_margin_left"
+                            android:text="@string/str_name"
+                            android:textColor="@color/color_main_friend_txt"
+                            android:textSize="@dimen/login_find_txt_size"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_receipt_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8"
+                            android:background="@drawable/number2"
+                            android:padding="@dimen/item_margin_left"
+                            android:singleLine="true"
+                            android:textColor="@color/color_input_point_request"
+                            android:textSize="@dimen/login_find_txt_size" />
+                    </LinearLayout>
+
+                    <!-- 핸드폰/주민번호 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/item_margin_left"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txt_user_info"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:background="@drawable/charge_title"
+                            android:gravity="center"
+                            android:paddingBottom="@dimen/item_margin_left"
+                            android:paddingTop="@dimen/item_margin_left"
+                            android:text="@string/str_phone_num"
+                            android:textColor="@color/color_main_friend_txt"
+                            android:textSize="@dimen/login_find_txt_size"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_regi_code"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <EditText
+                                android:id="@+id/et_regi_code1"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/number2"
+                                android:inputType="number"
+                                android:maxLength="6"
+                                android:padding="@dimen/item_margin_left"
+                                android:singleLine="true"
+                                android:textColor="@color/color_input_point_request"
+                                android:textSize="@dimen/login_find_txt_size" />
+
+                            <EditText
+                                android:id="@+id/et_regi_code2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/item_padding"
+                                android:layout_weight="1"
+                                android:background="@drawable/number3"
+                                android:inputType="number"
+                                android:maxLength="7"
+                                android:padding="@dimen/item_margin_left"
+                                android:singleLine="true"
+                                android:textColor="@color/color_input_point_request"
+                                android:textSize="@dimen/login_find_txt_size" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_receipt_phone_num"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/et_receipt_first_num"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/number2"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:maxLength="3"
+                                android:padding="@dimen/item_margin_left"
+                                android:singleLine="true"
+                                android:textColor="@color/color_input_point_request"
+                                android:textSize="@dimen/login_find_txt_size" />
+
+                            <EditText
+                                android:id="@+id/et_receipt_middle_num"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/item_padding"
+                                android:layout_weight="1"
+                                android:background="@drawable/number3"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:maxLength="4"
+                                android:padding="@dimen/item_margin_left"
+                                android:singleLine="true"
+                                android:textColor="@color/color_input_point_request"
+                                android:textSize="@dimen/login_find_txt_size" />
+
+                            <EditText
+                                android:id="@+id/et_receipt_last_num"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/item_padding"
+                                android:layout_weight="1"
+                                android:background="@drawable/number3"
+                                android:gravity="center"
+                                android:inputType="number"
+                                android:maxLength="4"
+                                android:padding="@dimen/item_margin_left"
+                                android:singleLine="true"
+                                android:textColor="@color/color_input_point_request"
+                                android:textSize="@dimen/login_find_txt_size" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <RadioButton
+                        android:id="@+id/rb_businessman"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/item_margin_left"
+                        android:background="@null"
+                        android:button="@drawable/rb_chk_selector"
+                        android:paddingLeft="@dimen/item_padding"
+                        android:text="@string/str_businessman" />
+
+                    <!-- 사업자번호 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/item_margin_left"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:background="@drawable/number"
+                            android:gravity="center"
+                            android:paddingBottom="@dimen/item_margin_left"
+                            android:paddingTop="@dimen/item_margin_left"
+                            android:text="@string/str_businessman_registered_num"
+                            android:textColor="@color/color_main_friend_txt"
+                            android:textSize="@dimen/login_find_txt_size"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txt_receipt_businessman_registered"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8"
+                            android:background="@drawable/fixed2"
+                            android:padding="@dimen/item_margin_left"
+                            android:singleLine="true"
+                            android:textColor="@color/color_input_point_request"
+                            android:textSize="@dimen/login_find_txt_size" />
+                    </LinearLayout>
+                </RadioGroup>
+
+                <!-- 세금계산서 -->
+                <LinearLayout
+                    android:id="@+id/ll_tax_invoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/agreement_margin"
+                    android:paddingRight="@dimen/agreement_margin"
+                    android:visibility="gone">
+
+                    <!-- 사업자번호 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/item_margin_left"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:background="@drawable/number"
+                            android:gravity="center"
+                            android:paddingBottom="@dimen/item_margin_left"
+                            android:paddingTop="@dimen/item_margin_left"
+                            android:text="@string/str_businessman_registered_num"
+                            android:textColor="@color/color_main_friend_txt"
+                            android:textSize="@dimen/login_find_txt_size"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txt_tax_invoice_businessman_registered"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8"
+                            android:background="@drawable/fixed2"
+                            android:padding="@dimen/item_margin_left"
+                            android:singleLine="true"
+                            android:textColor="@color/color_input_point_request"
+                            android:textSize="@dimen/login_find_txt_size" />
+                    </LinearLayout>
+
+                    <!-- 이메일 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/item_margin_left"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:background="@drawable/number"
+                            android:gravity="center"
+                            android:paddingBottom="@dimen/item_margin_left"
+                            android:paddingTop="@dimen/item_margin_left"
+                            android:text="@string/str_email"
+                            android:textColor="@color/color_main_friend_txt"
+                            android:textSize="@dimen/login_find_txt_size"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:id="@+id/et_tax_invoice_email"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="8"
+                            android:background="@drawable/number2"
+                            android:padding="@dimen/item_margin_left"
+                            android:singleLine="true"
+                            android:textColor="@color/color_input_point_request"
+                            android:textSize="@dimen/login_find_txt_size" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_charge_request"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/item_margin_left"
+                android:background="@drawable/btn_membership_selector"
+                android:paddingBottom="@dimen/item_margin_left"
+                android:paddingTop="@dimen/item_margin_left"
+                android:text="@string/str_charge_request"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/input_info_txt_size" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/item_margin_left"
+                android:layout_marginLeft="@dimen/agreement_margin"
+                android:layout_marginRight="@dimen/agreement_margin"
+                android:background="@drawable/ad_item_bg"
+                android:paddingBottom="@dimen/item_margin_left"
+                android:paddingLeft="@dimen/item_padding"
+                android:paddingRight="@dimen/item_padding"
+                android:paddingTop="@dimen/item_margin_left">
+
+                <WebView
+                    android:id="@+id/wv_info_msg2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

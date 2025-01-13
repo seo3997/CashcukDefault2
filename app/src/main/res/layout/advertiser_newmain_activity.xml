@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fl_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.cashcuk.MainTitleBar
+            android:id="@+id/main_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.cashcuk.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- 충전금 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:background="@drawable/bg2"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/item_margin_left"
+            android:paddingLeft="@dimen/agreement_margin"
+            android:paddingRight="@dimen/agreement_margin"
+            android:paddingTop="@dimen/agreement_margin">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/number"
+                    android:gravity="center_vertical|left"
+                    android:paddingBottom="@dimen/item_padding"
+                    android:paddingLeft="@dimen/item_margin_left"
+                    android:paddingRight="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_padding"
+                    android:text="@string/str_chargenew_money"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/sub_title_txt_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_charge_money"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:background="#ffffff"
+                    android:gravity="center_vertical|right"
+                    android:paddingBottom="@dimen/item_padding"
+                    android:paddingLeft="@dimen/item_margin_left"
+                    android:paddingRight="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_padding"
+                    android:text="0"
+                    android:textColor="@color/color_ad_main"
+                    android:textSize="@dimen/sub_title_txt_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:gravity="center_vertical|left"
+                    android:paddingBottom="@dimen/item_padding"
+                    android:paddingTop="@dimen/item_padding"
+                    android:text="@string/str_won"
+                    android:textColor="@color/color_find_press_txt"
+                    android:textSize="@dimen/sub_title_txt_size"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/ll_charge_details"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_padding"
+                    android:layout_weight="2"
+                    android:background="@drawable/btn_advertiser_main_selector"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/item_padding">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/icon2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/item_padding"
+                        android:text="@string/str_detail"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/authentication_txt_size" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:background="@drawable/bar4" />
+
+            <LinearLayout
+                android:id="@+id/btn_change_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginLeft="@dimen/item_padding"
+                android:layout_marginTop="@dimen/item_padding"
+                android:background="@drawable/btn_advertiser_main_selector"
+                android:orientation="horizontal"
+                android:padding="@dimen/item_padding">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/icon1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_padding"
+                    android:text="@string/str_change_point"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/authentication_txt_size" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <!--충전금-->
+
+
+        <!-- 광고진행순서 -->
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/agreement_margin"
+        android:layout_marginRight="@dimen/agreement_margin"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:background="@drawable/ad_process"
+                android:orientation="horizontal">
+             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btn_charge"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_ad1_selector"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/input_info_txt_size" />
+
+
+                    <Button
+                        android:id="@+id/btn_make_ad"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_ad2_selector"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:layout_marginTop="@dimen/item_padding"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/input_info_txt_size" />
+
+                    <Button
+                        android:id="@+id/btn_make_push"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_ad3_selector"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:layout_marginTop="@dimen/item_padding"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/input_info_txt_size" />
+
+
+                    <Button
+                        android:id="@+id/btn_my_ad_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_ad4_selector"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:layout_marginTop="@dimen/item_padding"
+                        android:layout_marginBottom="0dp"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/input_info_txt_size" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <!-- 광고진행순서 -->
+
+        <!-- 광고금액 -->
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/agreement_margin"
+        android:layout_marginRight="@dimen/agreement_margin"
+        android:gravity="bottom"
+        android:layout_weight="2"
+        android:orientation="vertical">
+            <!-- 광고현황 -->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="@drawable/number"
+                        android:gravity="center_vertical|left"
+                        android:paddingBottom="@dimen/item_padding"
+                        android:paddingLeft="@dimen/item_margin_left"
+                        android:paddingRight="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_padding"
+                        android:text="@string/str_ad_momeny_title"
+                        android:textColor="@color/color_main_friend_txt"
+                        android:textSize="@dimen/sub_title_txt_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_total_ad_cost"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:background="@color/color_ad_main"
+                        android:gravity="center_vertical|right"
+                        android:paddingBottom="@dimen/item_padding"
+                        android:paddingLeft="@dimen/item_margin_left"
+                        android:paddingRight="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_padding"
+                        android:text="0"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/sub_title_txt_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/color_ad_main"
+                        android:gravity="center_vertical|left"
+                        android:paddingBottom="@dimen/item_padding"
+                        android:paddingTop="@dimen/item_padding"
+                        android:text="@string/str_won"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/sub_title_txt_size"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/li_total_ad_cost_list"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/item_padding"
+                        android:layout_weight="2"
+                        android:background="@drawable/btn_advertiser_main_selector"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/item_padding">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/icon2" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/item_padding"
+                            android:text="@string/str_detail"
+                            android:textColor="@color/color_white"
+                            android:textSize="@dimen/authentication_txt_size" />
+                    </LinearLayout>
+                </LinearLayout>
+            <!--광고현황-->
+            <!--푸시현황 -->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/item_padding"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="@drawable/number"
+                        android:gravity="center_vertical|left"
+                        android:paddingBottom="@dimen/item_padding"
+                        android:paddingLeft="@dimen/item_margin_left"
+                        android:paddingRight="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_padding"
+                        android:text="@string/str_ad_push_title"
+                        android:textColor="@color/color_main_friend_txt"
+                        android:textSize="@dimen/sub_title_txt_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_total_push_cost"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:background="@color/color_ad_main"
+                        android:gravity="center_vertical|right"
+                        android:paddingBottom="@dimen/item_padding"
+                        android:paddingLeft="@dimen/item_margin_left"
+                        android:paddingRight="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_padding"
+                        android:text="0"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/sub_title_txt_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/color_ad_main"
+                        android:gravity="center_vertical|left"
+                        android:paddingBottom="@dimen/item_padding"
+                        android:paddingTop="@dimen/item_padding"
+                        android:text="@string/str_won"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/sub_title_txt_size"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/li_all_push_state"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/item_padding"
+                        android:layout_weight="2"
+                        android:background="@drawable/btn_advertiser_main_selector"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/item_padding">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/icon2" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/item_padding"
+                            android:text="@string/str_detail"
+                            android:textColor="@color/color_white"
+                            android:textSize="@dimen/authentication_txt_size" />
+                    </LinearLayout>
+                </LinearLayout>
+            <!--푸시현황-->
+            <!--광고총액 -->
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/item_padding"
+                    android:paddingBottom="@dimen/item_padding"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="@drawable/number"
+                        android:gravity="center_vertical|left"
+                        android:paddingBottom="@dimen/item_padding"
+                        android:paddingLeft="@dimen/item_margin_left"
+                        android:paddingRight="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_padding"
+                        android:text="@string/str_adpush_title"
+                        android:textColor="@color/color_main_friend_txt"
+                        android:textSize="@dimen/sub_title_txt_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_total_adpush_cost"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:background="@color/color_ad_main"
+                        android:gravity="center_vertical|right"
+                        android:paddingBottom="@dimen/item_padding"
+                        android:paddingLeft="@dimen/item_margin_left"
+                        android:paddingRight="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_padding"
+                        android:text="0"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/sub_title_txt_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/color_ad_main"
+                        android:gravity="center_vertical|left"
+                        android:paddingBottom="@dimen/item_padding"
+                        android:paddingTop="@dimen/item_padding"
+                        android:text="@string/str_won"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/sub_title_txt_size"
+                        android:textStyle="bold" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/item_padding"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/item_padding">
+                    </LinearLayout>
+
+                </LinearLayout>
+             <!--광고총액-->
+        </LinearLayout>
+        <!-- 광고금액 -->
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_progress_circle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/loading_intro_animation"
+            />
+    </LinearLayout>
+</FrameLayout>

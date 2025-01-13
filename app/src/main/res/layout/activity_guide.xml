@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/guide_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_guide_page_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="@dimen/agreement_margin"
+        android:orientation="horizontal">
+
+       <!-- <ImageView
+            android:id="@+id/iv_tutorial1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/one_press" />
+
+        <ImageView
+            android:id="@+id/iv_tutorial2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/item_margin_left"
+            android:src="@drawable/one" />
+
+        <ImageView
+            android:id="@+id/iv_tutorial3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/item_padding"
+            android:src="@drawable/one" />-->
+    </LinearLayout>
+</FrameLayout>

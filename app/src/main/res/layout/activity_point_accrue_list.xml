@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fl_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.cashcuk.MainTitleBar
+            android:id="@+id/main_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.cashcuk.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <include
+            android:id="@+id/layout_my_point"
+            layout="@layout/my_point"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/lv_point_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/btn_use"
+                android:layout_marginBottom="@dimen/item_margin_left"
+                android:clickable="false"
+                android:divider="@null"
+                android:listSelector="@android:color/transparent"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/ll_list_empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/str_list_empty"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/change_pwd_txt_size" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:background="@drawable/backimg" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_use"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/color_input_point_request"
+                android:paddingBottom="@dimen/item_margin_left"
+                android:paddingTop="@dimen/item_margin_left"
+                android:text="@string/str_use_point_request"
+                android:textColor="@drawable/txt_input_request_selector"
+                android:textSize="@dimen/sub_title_txt_size" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_progress_circle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/loading_intro_animation"
+            />
+    </LinearLayout>
+</FrameLayout>

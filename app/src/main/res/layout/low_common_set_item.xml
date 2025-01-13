@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_low_common_set"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/item_margin_left">
+
+        <TextView
+            android:id="@+id/txt_common_set_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@drawable/number"
+            android:gravity="center"
+            android:paddingBottom="@dimen/item_margin_left"
+            android:paddingTop="@dimen/item_margin_left"
+            android:textColor="@color/color_main_friend_txt"
+            android:textSize="@dimen/login_find_txt_size"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/rl_common_set_value"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/number2"
+            android:layout_weight="8">
+
+            <TextView
+                android:id="@+id/txt_common_set_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/item_margin_left"
+                android:textColor="@color/color_input_point_request"
+                android:textColorHint="@color/color_hint_txt"
+                android:textSize="@dimen/login_find_txt_size" />
+
+            <ImageButton
+                android:id="@+id/ib_common_set_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/item_margin_left"
+                android:background="@null"
+                android:paddingRight="@dimen/item_padding"
+                android:src="@drawable/btn_category_arrow_selector" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fl_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.cashcuk.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <include
+            android:id="@+id/view_preview"
+            layout="@layout/dlg_preview_charater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/item_margin_left"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_preview_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/item_margin_left"
+                android:layout_weight="1"
+                android:background="@drawable/btn_character_more_selector"
+                android:padding="@dimen/item_margin_left"
+                android:text="@string/str_cancel"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/login_txt_size" />
+
+            <Button
+                android:id="@+id/btn_preview_ok"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_membership_selector"
+                android:padding="@dimen/item_margin_left"
+                android:text="@string/str_down"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/login_txt_size" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_progress_circle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/loading_intro_animation"
+            />
+    </LinearLayout>
+</FrameLayout>

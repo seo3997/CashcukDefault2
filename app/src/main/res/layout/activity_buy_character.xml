@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fl_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.cashcuk.MainTitleBar
+            android:id="@+id/main_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.cashcuk.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/txt_category_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/top"
+            android:gravity="center"
+            android:padding="@dimen/item_margin_left"
+            android:text="Category"
+            android:textColor="@color/color_my_point"
+            android:textSize="@dimen/ad_detail_btn_txt_size"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_representation_characte"
+            android:background="@drawable/shadow" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ll_character_empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/str_character_empty"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/change_pwd_txt_size" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/backimg" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/lv_buy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/btn_other_category"
+                android:layout_marginLeft="@dimen/agreement_margin"
+                android:layout_marginRight="@dimen/agreement_margin"
+                android:layout_marginTop="@dimen/item_padding"
+                android:divider="@null"
+                android:listSelector="@android:color/transparent"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_other_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/item_margin_left"
+                android:background="@drawable/btn_character_more_selector"
+                android:padding="@dimen/item_margin_left"
+                android:text="@string/str_other_category"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/ad_detail_btn_txt_size" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_progress_circle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/loading_intro_animation"
+            />
+    </LinearLayout>
+</FrameLayout>

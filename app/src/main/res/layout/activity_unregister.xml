@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.cashcuk.MainTitleBar
+        android:id="@+id/main_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.cashcuk.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/item_margin_left"
+            android:paddingTop="@dimen/login_margin_top">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/login_margin_top"
+                android:layout_marginRight="@dimen/login_margin_top"
+                android:background="@drawable/bg1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/agreement_margin"
+                android:paddingTop="@dimen/agreement_margin">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/agreement_margin"
+                    android:paddingRight="@dimen/agreement_margin"
+                    android:src="@drawable/logo2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/agreement_margin"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/agreement_margin"
+                    android:paddingRight="@dimen/agreement_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/str_chk_unregister"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/input_info_txt_size" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/agreement_margin"
+                        android:text="@string/str_case_unregister"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/authentication_txt_size"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_marginLeft="@dimen/agreement_margin"
+                    android:layout_marginRight="@dimen/agreement_margin"
+                    android:layout_marginTop="@dimen/agreement_margin"
+                    android:background="@drawable/bar2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/ll_cause"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                    <!--
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">-->
+                    <LinearLayout
+                        android:id="@+id/ll_etc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/item_padding"
+                        android:gravity="center_vertical"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:orientation="horizontal"
+                        android:paddingLeft="@dimen/item_margin_left"
+                        android:paddingRight="@dimen/item_margin_left">
+
+                        <RadioButton
+                            android:id="@+id/rb_etc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:button="@drawable/rb_chk_selector"
+                            android:clickable="false" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/item_margin_left"
+                            android:text="@string/str_etc_hint"
+                            android:textColor="@color/color_white"
+                            android:textSize="@dimen/authentication_txt_size"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <!--<LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/item_padding"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:orientation="vertical">-->
+
+                    <!-- <EditText
+                         android:id="@+id/et_etc"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:background="@null"
+                         android:hint="@string/str_etc_hint"
+                         android:maxLength="100"
+                         android:singleLine="true"
+                         android:textColor="@color/color_dlg_msg"
+                         android:textColorHint="@color/color_hint_txt"
+                         android:textSize="@dimen/input_info_txt_size" />
+
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="@dimen/divider_height"
+                         android:background="@color/color_hint_txt" />-->
+                    <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+
+                    <EditText
+                        android:id="@+id/et_etc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/item_padding"
+                        android:background="@drawable/bg6"
+                        android:gravity="top"
+                        android:hint="@string/str_input_cause_unregiste_err"
+                        android:maxLength="100"
+                        android:minHeight="@dimen/out_membership_min_height"
+                        android:padding="@dimen/item_padding"
+                        android:textColor="@color/color_white"
+                        android:textColorHint="@color/color_hint_txt"
+                        android:textSize="@dimen/authentication_txt_size" />
+                </LinearLayout>
+
+                <!--<ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="@dimen/agreement_margin"
+                    android:src="@drawable/tal" />-->
+
+
+                <!--<LinearLayout
+                    android:id="@+id/ll_cause"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+                <LinearLayout
+                    android:id="@+id/ll_etc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/item_margin_left">
+
+                    <RadioButton
+                        android:id="@+id/rb_etc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:background="@null"
+                        android:button="@drawable/rb_chk_selector" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/item_padding"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/et_etc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:maxLength="100"
+                            android:hint="@string/str_etc_hint"
+                            android:singleLine="true"
+                            android:textColor="@color/color_dlg_msg"
+                            android:textColorHint="@color/color_hint_txt"
+                            android:textSize="@dimen/input_info_txt_size" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/divider_height"
+                            android:background="@color/color_hint_txt" />
+                    </LinearLayout>-->
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_unregister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/login_margin_top"
+                android:layout_marginRight="@dimen/login_margin_top"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:background="@drawable/btn_membership_selector"
+                android:paddingBottom="@dimen/item_margin_left"
+                android:paddingTop="@dimen/item_margin_left"
+                android:text="@string/str_out_membeship"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/input_info_txt_size" />
+
+            <!--<RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btn_unregister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="@dimen/item_margin_left"
+                    android:background="@drawable/btn_membership_selector"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_out_membeship"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/input_info_txt_size" />
+            </RelativeLayout>-->
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

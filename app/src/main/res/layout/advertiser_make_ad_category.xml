@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll_category_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/btn_del"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_category1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input2"
+            android:padding="@dimen/item_margin_left">
+
+            <TextView
+                android:id="@+id/txt_category1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_input_point_request"
+                android:textColorHint="@color/color_hint_txt"
+                android:textSize="@dimen/tab_title_txt_size" />
+
+            <ImageButton
+                android:id="@+id/ib_category1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/item_padding"
+                android:background="@null"
+                android:src="@drawable/btn_category_arrow_selector" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_low_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_padding"
+            android:background="@drawable/input2"
+            android:orientation="horizontal"
+            android:padding="@dimen/item_margin_left">
+
+            <RelativeLayout
+                android:id="@+id/rl_category2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/txt_category2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/ib_category2"
+                    android:textColor="@color/color_input_point_request"
+                    android:textColorHint="@color/color_hint_txt"
+                    android:textSize="@dimen/tab_title_txt_size" />
+
+                <ImageButton
+                    android:id="@+id/ib_category2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/item_margin_left"
+                    android:background="@null"
+                    android:src="@drawable/btn_category_arrow_selector" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/item_margin_left"
+                android:background="@drawable/bar5" />
+
+            <RelativeLayout
+                android:id="@+id/rl_category3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/txt_category3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/item_margin_left"
+                    android:layout_toLeftOf="@+id/ib_category3"
+                    android:textColor="@color/color_input_point_request"
+                    android:textColorHint="@color/color_hint_txt"
+                    android:textSize="@dimen/tab_title_txt_size" />
+
+                <ImageButton
+                    android:id="@+id/ib_category3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/item_margin_left"
+                    android:background="@null"
+                    android:src="@drawable/btn_category_arrow_selector" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/item_padding"
+        android:background="@drawable/btn_character_more_selector"
+        android:padding="@dimen/item_margin_left"
+        android:text="-"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/dlg_title_txt_size" />
+</RelativeLayout>

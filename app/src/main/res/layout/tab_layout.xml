@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_white"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+
+    <!-- 광고 리스트 -->
+    <LinearLayout
+        android:id="@+id/ll_tab2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_margin_left"
+            android:layout_marginTop="@dimen/item_margin_left"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/main_icon01" />
+
+            <TextView
+                android:id="@+id/txt_tab2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="@dimen/item_padding"
+
+                android:gravity="center"
+                android:text="@string/str_ad_list"
+                android:textColor="@color/color_input_point_request"
+                android:textSize="@dimen/login_find_txt_size"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_this_current2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/login_divider_height"
+            android:background="@color/color_tab_under_color"
+            android:orientation="horizontal"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_div1"
+        android:layout_width="@dimen/divider_height"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/agreement_margin"
+        android:layout_marginTop="@dimen/agreement_margin"
+        android:background="@color/color_main_friend_txt" />
+
+    <!-- 관심광고 -->
+    <LinearLayout
+        android:id="@+id/ll_tab3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_margin_left"
+            android:layout_marginTop="@dimen/item_margin_left"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/main_icon02" />
+
+            <TextView
+                android:id="@+id/txt_tab3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/item_padding"
+                android:gravity="center"
+                android:text="@string/str_tab_interest_ad"
+                android:textColor="@color/color_input_point_request"
+                android:textSize="@dimen/login_find_txt_size"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_this_current3"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/login_divider_height"
+            android:background="@color/color_tab_under_color"
+            android:orientation="horizontal"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_div2"
+        android:layout_width="@dimen/divider_height"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/agreement_margin"
+        android:layout_marginTop="@dimen/agreement_margin"
+        android:background="@color/color_main_friend_txt" />
+
+    <!-- 설정 -->
+    <LinearLayout
+        android:id="@+id/ll_tab4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_margin_left"
+            android:layout_marginTop="@dimen/item_margin_left"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/main_icon03" />
+
+            <TextView
+                android:id="@+id/txt_tab4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/item_padding"
+                android:gravity="center"
+                android:text="@string/str_setting"
+                android:textColor="@color/color_input_point_request"
+                android:textSize="@dimen/login_find_txt_size"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_this_current4"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/login_divider_height"
+            android:background="@color/color_tab_under_color"
+            android:orientation="horizontal"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+</LinearLayout>

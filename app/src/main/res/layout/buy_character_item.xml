@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/item_margin_left"
+        android:background="@drawable/ad_list_item_selector"
+        android:paddingBottom="@dimen/item_padding"
+        android:paddingLeft="@dimen/item_margin_left"
+        android:paddingTop="@dimen/item_padding">
+
+        <ImageView
+            android:id="@+id/iv_buy"
+            android:layout_width="@dimen/ad_list_item_img_width"
+            android:layout_height="@dimen/out_membership_min_height"
+            android:layout_centerVertical="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="@dimen/item_padding"
+            android:layout_marginLeft="@dimen/agreement_margin"
+            android:layout_marginRight="@dimen/agreement_margin"
+            android:layout_marginTop="@dimen/item_padding"
+            android:layout_toRightOf="@+id/iv_buy"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <!-- 명칭 -->
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/color_main_friend_txt"
+                android:textSize="@dimen/dlg_title_txt_size"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_marginTop="@dimen/item_padding"
+                android:background="@drawable/bar4" />
+
+            <!-- 판매자명 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_padding"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/str_sale_name"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/character_list_item_txt_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_padding"
+                    android:singleLine="true"
+                    android:text=":"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/character_list_item_txt_size" />
+
+                <TextView
+                    android:id="@+id/txt_sale_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_padding"
+                    android:singleLine="true"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/character_list_item_txt_size" />
+            </LinearLayout>
+
+            <!-- 판매자 ID -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_padding"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/str_sale_id"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/character_list_item_txt_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_padding"
+                    android:singleLine="true"
+                    android:text=":"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/character_list_item_txt_size"  />
+
+                <TextView
+                    android:id="@+id/txt_sale_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_padding"
+                    android:singleLine="true"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/character_list_item_txt_size" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/ll_point"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/point2" />
+
+                    <TextView
+                        android:id="@+id/txt_point"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/login_divider_height"
+                        android:text="0"
+                        android:textColor="@color/color_main_friend_txt"
+                        android:textSize="@dimen/sub_title_txt_size"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/ll_point"
+                    android:layout_marginLeft="@dimen/login_divider_height"
+                    android:layout_toRightOf="@+id/ll_point"
+                    android:text="@string/str_point_en"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/tab_title_txt_size"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_down_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/item_margin_left"
+        android:background="@drawable/cha_get"
+        android:visibility="visible" />
+
+</RelativeLayout>

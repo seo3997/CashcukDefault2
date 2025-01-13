@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cashcuk">
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <!--<protected-broadcast android:name="android.intent.action.MEDIA_MOUNTED" />-->
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-feature android:name="android.hardware.telephony" android:required="true" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <uses-permission android:name="android.permission.RECEIVE_SMS"  android:required="true"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" android:required="true"/>
+
+    <!-- GCM 사용을 위해 추가 되는 permission -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/app_icon"
+        android:label="@string/app_name_ko"
+        android:supportsRtl="true"
+        android:largeHeap="true"
+        android:name="com.igaworks.IgawDefaultApplication"
+        android:theme="@android:style/Theme.Light.NoTitleBar"
+        android:usesCleartextTraffic="true">
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.cashcuk.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+
+        <activity android:name=".IntroActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name=".IntroActivity" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDRVZ_WwEGTrF7YewxS2AiuN8SUgsYP_ow" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="@string/str_kakao_key"/>
+
+        <receiver android:name=".ad.charactercall.CallStateBR"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+                <action android:name="android.intent.action.NEW_OUTGOING_CALL" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".ad.charactercall.receive.ReceiveCallService" />
+        <service android:name=".ad.charactercall.send.SendCallService" />
+
+        <activity
+            android:name=".dialog.DlgImgZoom"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+
+        <activity
+            android:name=".dialog.DlgBtnActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+
+        <activity
+            android:name=".dialog.DlgChkPwdActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+
+        <activity
+            android:name=".dialog.DlgFirstPhoneNumActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+
+        <activity
+            android:name=".dialog.DlgDatePicker"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+
+        <activity
+            android:name=".advertiser.sendpush.DlgPushTimePicker"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+
+        <activity
+            android:name=".dialog.DlgTimePicker"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+
+        <activity
+            android:name=".loginout.FindEmailPwdActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".loginout.LoginActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".membership.MembershipActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".membership.MembershipSuccessActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".membership.TermsAgreeActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".membership.MobileAuthenticationWebActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".setting.MobileAuthenticationActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".setting.FindPwdActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".pointlist.PointListActivitiy"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".pointlist.PointInputAccountActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".pointlist.AccruePointListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".pointlist.UsePointListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".setting.AccountActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".setting.AccountSetActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".setting.ChangePwdActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".setting.UnregisterActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".setting.CustomerServiceActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".setting.CompanyIntroductionActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".setting.SettingWebViewActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- GCM을 수신하기 위한 BroadcastReceiver -->
+        <service
+            android:name=".MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!--
+        <receiver
+            android:name="com.google.android.gcm.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="com.cashcuk" />
+            </intent-filter>
+        </receiver>
+        -->
+
+        <!-- SMS를 받아오기 위한 BroadcastReceiver -->
+        <receiver android:name=".common.SMSReceiver"
+            android:exported="true">
+            <intent-filter>
+                <!-- 문자를 받아올 수 있게 intent-filter 추가 -->
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- GCM을 수신하기 위한 BroadcastReceiver -->
+        <!--
+        <service android:name="com.cashcuk.GCMIntentService" />
+        -->
+        <!-- 2차 -->
+        <activity
+            android:name=".advertiser.main.AdvertiserMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".advertiser.main.AdvertiserNewMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".advertiser.AdvertiserRegistrationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".findaddr.FindAddressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".advertiser.adcost.TotalADCostList"
+            android:screenOrientation="portrait" />
+        <!-- 충전 관련 -->
+        <activity
+            android:name=".advertiser.charge.ChargeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".advertiser.charge.chargelist.ChargeListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".advertiser.charge.chargelist.ChargeAccrueListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".advertiser.charge.chargelist.ChargeUseListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".advertiser.charge.ChangePointActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".advertiser.refund.RefundRequestActivity"
+            android:screenOrientation="portrait" />
+        <!-- 광고제작 관련 -->
+        <activity
+            android:name=".advertiser.makead.MakeADMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".advertiser.makead.MakeADPreviewActivity"
+            android:screenOrientation="portrait" />
+        <!-- 광고 push 관련-->
+        <activity
+            android:name=".advertiser.sendpush.ADTargetSendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".push.PushReceiveActivity"
+            android:screenOrientation="portrait"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="true" />
+        <activity
+            android:name=".advertiser.sendpush.ADPushPreviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".advertiser.sendpush.ADPushSendPresentConditionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".advertiser.sendpush.ADPushSendCurrentState"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".advertiser.sendpush.view.PushSendViewActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 내 광고 관련-->
+        <activity
+            android:name=".advertiser.myad.MyADActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 캐릭터 관련-->
+        <activity
+            android:name=".character.MyCharacterMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".character.setreceive.MyCharacterSetReceiveActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".character.updown.down.DownCharacterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".character.updown.up.UploadCharacterMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".character.updown.up.UpLoadCharListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".character.updown.up.UpLoadPreviewCharaterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".character.updown.up.UpLoadCharacterInputInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".character.view.CharacterListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".character.dlg.DlgCharaterMenu"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".character.dlg.DlgCharaterCategory"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".character.dlg.DlgCharaterSet"
+            android:windowSoftInputMode="stateVisible"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".character.updown.down.DownPreviewCharaterActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- push 보관함 -->
+        <activity
+            android:name=".push.PushStorageActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 광고보기 -->
+        <activity
+            android:name=".ad.detailview.ADDetailViewActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 이벤트 -->
+        <activity
+            android:name=".main.EventWebViewActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".setting.GuideActivity"
+            android:screenOrientation="portrait" />
+
+        <receiver android:name=".ad.charactercall.ScreenStateBroadCast"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.SCREEN_OFF" />
+                <action android:name="android.intent.action.SCREEN_ON" />
+            </intent-filter>
+        </receiver>
+
+
+        <activity android:name="com.nextapps.naswall.NASWall" android:configChanges="keyboardHidden|orientation" />
+
+        <meta-data android:name="igaworks_app_key" android:value="879283822" />
+        <meta-data android:name="igaworks_hash_key" android:value="e7f466dfe60245cc" />
+        <meta-data android:name="igaworks_reward_server_type" android:value="server"/>
+
+        <activity android:name="com.igaworks.adpopcorn.activity.ApOfferWallActivity_NT"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name="com.igaworks.adpopcorn.activity.ApVideoAdActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="landscape"/>
+
+        <meta-data android:name="android.max_aspect" android:value="2.1" />
+
+
+    </application>
+
+</manifest>

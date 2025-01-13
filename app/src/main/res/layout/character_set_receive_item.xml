@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/agreement_margin"
+        android:layout_marginRight="@dimen/agreement_margin"
+        android:layout_marginTop="@dimen/item_margin_left"
+        android:background="@drawable/ad_list_item_selector"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="9"
+            android:orientation="vertical"
+            android:padding="@dimen/item_margin_left">
+
+            <TextView
+                android:id="@+id/txt_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/color_main_friend_txt"
+                android:textSize="@dimen/dlg_title_txt_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_phone_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_padding"
+                android:singleLine="true"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/authentication_txt_size"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/chk_set_receive"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/item_margin_left"
+            android:background="@null"
+            android:button="@drawable/chk_receipt_selector"
+            android:clickable="false"
+            android:focusable="false" />
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_low_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/item_margin_left"
+        android:background="@drawable/input2"
+        android:orientation="horizontal"
+        android:padding="@dimen/item_margin_left">
+
+        <RelativeLayout
+            android:id="@+id/rl_category2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/txt_category2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@color/color_input_point_request"
+                android:textColorHint="@color/color_hint_txt"
+                android:textSize="@dimen/login_find_txt_size" />
+
+            <ImageButton
+                android:id="@+id/ib_category2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/item_margin_left"
+                android:background="@null"
+                android:src="@drawable/btn_category_arrow_selector" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/item_margin_left"
+            android:background="@drawable/bar5" />
+
+        <RelativeLayout
+            android:id="@+id/rl_category3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/txt_category3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/item_margin_left"
+                android:textColor="@color/color_input_point_request"
+                android:textColorHint="@color/color_hint_txt"
+                android:textSize="@dimen/login_find_txt_size" />
+
+            <ImageButton
+                android:id="@+id/ib_category3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/item_margin_left"
+                android:background="@null"
+                android:paddingRight="@dimen/item_padding"
+                android:src="@drawable/btn_category_arrow_selector" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

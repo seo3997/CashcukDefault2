@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.cashcuk.MainTitleBar
+        android:id="@+id/main_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.cashcuk.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/agreement_margin"
+        android:background="@drawable/bg1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/agreement_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="@dimen/txt_line_margin"
+                android:text="@string/str_customer_service_info1"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/dlg_title_txt_size" />
+
+            <TextView
+                android:id="@+id/txt_customer_service_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="@dimen/txt_line_margin"
+                android:text="@string/str_customer_service_info2"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/dlg_title_txt_size" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="center_vertical"
+                android:text="@string/str_customer_service_info3"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/dlg_title_txt_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginTop="@dimen/list_margin_top_bottom"
+            android:background="@drawable/bar2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/agreement_margin"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/str_customer_service_email"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/login_txt_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_inquiry_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="cashcuk@cashcuk.com"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/dlg_title_txt_size"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/ib_inquiry_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:src="@drawable/next_bt" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_customer_service_tel"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/login_txt_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_inquiry_tel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="1661-6185"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/dlg_title_txt_size"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/ib_inquiry_tel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:src="@drawable/next_bt" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

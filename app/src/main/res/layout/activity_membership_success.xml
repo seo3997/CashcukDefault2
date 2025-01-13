@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    android:orientation="vertical">
+
+    <com.cashcuk.MainTitleBar
+        android:id="@+id/main_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/login_margin_top"
+            android:background="@drawable/bg1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/login_margin_top">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/login_margin_top"
+                android:gravity="center"
+                android:text="@string/str_welcome"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/sub_title_txt_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/login_margin_top"
+                android:gravity="center"
+                android:text="@string/str_welcome_sub"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/tab_title_txt_size"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_go_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/agreement_margin"
+            android:layout_marginLeft="@dimen/agreement_margin"
+            android:layout_marginRight="@dimen/agreement_margin"
+            android:background="@drawable/btn_membership_selector"
+            android:paddingBottom="@dimen/agreement_margin"
+            android:paddingTop="@dimen/agreement_margin"
+            android:text="@string/str_go_login"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/input_info_txt_size" />
+    </LinearLayout>
+</LinearLayout>

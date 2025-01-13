@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <!-- 지역 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/top"
+                android:gravity="center"
+                android:paddingBottom="@dimen/item_margin_left"
+                android:paddingTop="@dimen/item_margin_left"
+                android:text="@string/str_area"
+                android:textColor="@color/color_my_point"
+                android:textSize="@dimen/authentication_txt_size"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shadow" />
+
+            <!-- 지역 카테고리 -->
+
+            <LinearLayout
+                android:id="@+id/ll_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/item_margin_left"
+                android:paddingRight="@dimen/item_margin_left" />
+
+            <!-- 일반정보 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/agreement_margin"
+                android:background="@drawable/top"
+                android:gravity="center"
+                android:paddingBottom="@dimen/item_margin_left"
+                android:paddingTop="@dimen/item_margin_left"
+                android:text="@string/str_user"
+                android:textColor="@color/color_my_point"
+                android:textSize="@dimen/authentication_txt_size"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shadow" />
+
+            <LinearLayout
+                android:id="@+id/ll_ad_send_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/item_margin_left"
+                android:layout_marginLeft="@dimen/item_margin_left"
+                android:layout_marginRight="@dimen/item_margin_left"
+                android:layout_marginTop="@dimen/item_padding"
+                android:orientation="vertical" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

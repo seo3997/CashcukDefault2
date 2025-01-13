@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fl_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.cashcuk.MainTitleBar
+            android:id="@+id/main_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.cashcuk.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/ll_make_ad_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_bar"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/txt_ad_taget_set"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_main_friend_txt"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_ad_target_set"
+                    android:textColor="@color/color_input_point_request"
+                    android:textSize="@dimen/tab_title_txt_size"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/ll_ad_taget_set_under"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/login_divider_height"
+                    android:layout_alignBottom="@+id/txt_ad_taget_set"
+                    android:background="@color/color_tab_under_color"
+                    android:orientation="horizontal" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/txt_ad_send_target"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_white"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_ad_send_target"
+                    android:textColor="@color/color_input_point_request"
+                    android:textSize="@dimen/tab_title_txt_size"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/ll_ad_send_target_under"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/login_divider_height"
+                    android:layout_alignBottom="@+id/txt_ad_send_target"
+                    android:background="@color/color_tab_under_color"
+                    android:orientation="horizontal"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/ll_page">
+
+                <com.cashcuk.advertiser.sendpush.view.ADTargetSetViewLinear1
+                    android:id="@+id/target_set_view_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <com.cashcuk.advertiser.sendpush.view.ADTargetChkViewLinear2
+                    android:id="@+id/target_chk_view_linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </androidx.viewpager.widget.ViewPager>
+
+            <LinearLayout
+                android:id="@+id/ll_page"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/fixed3"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="@dimen/item_margin_left"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/iv_page1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/iv_page2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_margin_left" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_progress_circle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/loading_intro_animation"
+            />
+    </LinearLayout>
+</FrameLayout>

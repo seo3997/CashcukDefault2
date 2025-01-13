@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.cashcuk.MainTitleBar
+        android:id="@+id/main_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.cashcuk.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_edits"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/agreement_margin"
+                android:layout_marginRight="@dimen/agreement_margin"
+                android:layout_marginTop="@dimen/agreement_margin"
+                android:background="@drawable/input2"
+                android:orientation="horizontal"
+                android:padding="@dimen/item_margin_left">
+
+                <RelativeLayout
+                    android:id="@+id/rl_category2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/txt_category2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/ib_category2"
+                        android:hint="@string/str_cities"
+                        android:textColor="@color/color_input_point_request"
+                        android:textColorHint="@color/color_hint_txt"
+                        android:textSize="@dimen/login_find_txt_size" />
+
+                    <ImageButton
+                        android:id="@+id/ib_category2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/item_margin_left"
+                        android:background="@null"
+                        android:src="@drawable/btn_category_arrow_selector" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/item_margin_left"
+                    android:background="@drawable/bar5" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_category3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/txt_category3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/item_margin_left"
+                        android:layout_toLeftOf="@+id/ib_category3"
+                        android:hint="@string/str_town"
+                        android:textColor="@color/color_input_point_request"
+                        android:textColorHint="@color/color_hint_txt"
+                        android:textSize="@dimen/login_find_txt_size" />
+
+                    <ImageButton
+                        android:id="@+id/ib_category3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/item_margin_left"
+                        android:background="@null"
+                        android:paddingRight="@dimen/item_padding"
+                        android:src="@drawable/btn_category_arrow_selector" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/et_detail_addr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/agreement_margin"
+                android:layout_marginRight="@dimen/agreement_margin"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:background="@drawable/input2"
+                android:hint="@string/str_detail_addr_hint"
+                android:padding="@dimen/item_margin_left"
+                android:singleLine="true"
+                android:textColor="@color/color_input_point_request"
+                android:textColorHint="@color/color_hint_txt"
+                android:textSize="@dimen/login_find_txt_size" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/agreement_margin"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:gravity="right">
+
+                <Button
+                    android:id="@+id/btn_addr_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/btn_membership_selector"
+                    android:padding="@dimen/item_margin_left"
+                    android:text="@string/str_search"
+                    android:textColor="@color/color_input_point_request"
+                    android:textSize="@dimen/authentication_txt_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/ll_btns"
+            android:layout_below="@+id/ll_edits"
+            android:layout_marginLeft="@dimen/agreement_margin"
+            android:layout_marginRight="@dimen/agreement_margin"
+            android:layout_marginTop="@dimen/agreement_margin">
+
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_btns"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/item_margin_left"
+            android:layout_marginLeft="@dimen/agreement_margin"
+            android:layout_marginRight="@dimen/agreement_margin"
+            android:layout_marginTop="@dimen/item_margin_left"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_find_addr_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/item_margin_left"
+                android:layout_weight="1"
+                android:background="@drawable/btn_character_more_selector"
+                android:padding="@dimen/item_margin_left"
+                android:text="@string/str_cancel"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/ad_detail_btn_txt_size" />
+
+            <Button
+                android:id="@+id/btn_find_addr_ok"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_membership_selector"
+                android:padding="@dimen/item_margin_left"
+                android:text="@string/str_ok"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/ad_detail_btn_txt_size" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

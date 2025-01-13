@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fl_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.cashcuk.MainTitleBar
+            android:id="@+id/main_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.cashcuk.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/main_title_bar" />
+
+        <ScrollView
+            android:id="@+id/ll_input_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/title_bar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/top"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_essential_item"
+                    android:textColor="@color/color_my_point"
+                    android:textSize="@dimen/authentication_txt_size"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shadow" />
+
+                <!-- 상호명 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/agreement_margin"
+                    android:paddingRight="@dimen/agreement_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="@drawable/number"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:text="@string/str_essential_trade_name"
+                        android:textColor="@color/color_main_friend_txt"
+                        android:textSize="@dimen/login_find_txt_size"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/et_trade_nm"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:background="@drawable/number2"
+                        android:padding="@dimen/item_margin_left"
+                        android:singleLine="true"
+                        android:textColor="@color/color_input_point_request"
+                        android:textColorHint="@color/color_hint_txt"
+                        android:textSize="@dimen/login_find_txt_size" />
+                </LinearLayout>
+
+                <!-- 대표자 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/agreement_margin"
+                    android:paddingRight="@dimen/agreement_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="@drawable/number"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:text="@string/str_essential_representative_name"
+                        android:textColor="@color/color_main_friend_txt"
+                        android:textSize="@dimen/login_find_txt_size"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/et_representative_nm"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:background="@drawable/number2"
+                        android:padding="@dimen/item_margin_left"
+                        android:singleLine="true"
+                        android:textColor="@color/color_input_point_request"
+                        android:textColorHint="@color/color_hint_txt"
+                        android:textSize="@dimen/login_find_txt_size" />
+                </LinearLayout>
+
+                <!-- 대표전화 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/agreement_margin"
+                    android:paddingRight="@dimen/agreement_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="@drawable/number"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:text="@string/str_essential_representative_tel"
+                        android:textColor="@color/color_main_friend_txt"
+                        android:textSize="@dimen/login_find_txt_size"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_receipt_phone_num"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txt_regi_first_num"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/number2"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:padding="@dimen/item_margin_left"
+                            android:singleLine="true"
+                            android:text="010"
+                            android:textColor="@color/color_input_point_request"
+                            android:textSize="@dimen/login_find_txt_size" />
+
+                        <EditText
+                            android:id="@+id/et_regi_middle_num"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/item_padding"
+                            android:layout_weight="1"
+                            android:background="@drawable/number3"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:maxLength="4"
+                            android:padding="@dimen/item_margin_left"
+                            android:singleLine="true"
+                            android:textColor="@color/color_input_point_request"
+                            android:textSize="@dimen/login_find_txt_size" />
+
+                        <EditText
+                            android:id="@+id/et_regi_last_num"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/item_padding"
+                            android:layout_weight="1"
+                            android:background="@drawable/number3"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:maxLength="4"
+                            android:padding="@dimen/item_margin_left"
+                            android:singleLine="true"
+                            android:textColor="@color/color_input_point_request"
+                            android:textSize="@dimen/login_find_txt_size" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 사업자 등록번호 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/agreement_margin"
+                    android:paddingRight="@dimen/agreement_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="@drawable/number"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:text="@string/str_essential_businessman_registered_num"
+                        android:textColor="@color/color_main_friend_txt"
+                        android:textSize="@dimen/login_find_txt_size"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/et_businessman_registered_num"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:background="@drawable/number2"
+                        android:inputType="number"
+                        android:padding="@dimen/item_margin_left"
+                        android:singleLine="true"
+                        android:textColor="@color/color_input_point_request"
+                        android:textColorHint="@color/color_hint_txt"
+                        android:textSize="@dimen/login_find_txt_size" />
+                </LinearLayout>
+
+                <!-- 홈페이지 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/agreement_margin"
+                    android:paddingRight="@dimen/agreement_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="@drawable/number"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:text="@string/str_homepage"
+                        android:textColor="@color/color_main_friend_txt"
+                        android:textSize="@dimen/login_find_txt_size"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/et_homepage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:background="@drawable/number2"
+                        android:padding="@dimen/item_margin_left"
+                        android:singleLine="true"
+                        android:textColor="@color/color_input_point_request"
+                        android:textColorHint="@color/color_hint_txt"
+                        android:textSize="@dimen/login_find_txt_size" />
+                </LinearLayout>
+
+                <!-- 주소 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/agreement_margin"
+                    android:paddingRight="@dimen/agreement_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="@drawable/number"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:text="@string/str_essential_address"
+                        android:textColor="@color/color_main_friend_txt"
+                        android:textSize="@dimen/login_find_txt_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_address"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:background="@drawable/number2"
+                        android:padding="@dimen/item_margin_left"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:textColor="@color/color_input_point_request"
+                        android:textColorHint="@color/color_hint_txt"
+                        android:textSize="@dimen/login_find_txt_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/item_margin_left"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:gravity="right">
+
+                    <Button
+                        android:id="@+id/btn_find_postcode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_button_selector"
+                        android:padding="@dimen/item_margin_left"
+                        android:text="@string/str_find_address_num"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/ad_detail_btn_txt_size"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_advertiser_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/item_margin_left"
+                    android:layout_marginTop="@dimen/agreement_margin"
+                    android:background="@drawable/img"
+                    android:padding="@dimen/agreement_margin"
+                    android:src="@drawable/imgplus" />
+
+                <TextView
+                    android:id="@+id/txt_essential_advertiser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_padding"
+                    android:text="@string/str_essential_img"
+                    android:textSize="@dimen/authentication_txt_size" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/make_ad_img_height"
+                    android:layout_marginLeft="@dimen/agreement_margin"
+                    android:layout_marginRight="@dimen/agreement_margin"
+                    android:layout_marginTop="@dimen/agreement_margin"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/iv_advertiser"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <ProgressBar
+                        android:id="@+id/pb_img"
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/btn_advertiser_info_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/item_margin_left"
+                    android:layout_marginLeft="@dimen/agreement_margin"
+                    android:layout_marginRight="@dimen/agreement_margin"
+                    android:layout_marginTop="@dimen/agreement_margin"
+                    android:background="@drawable/btn_membership_selector"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_registration_request"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/input_info_txt_size" />
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_progress_circle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</FrameLayout>

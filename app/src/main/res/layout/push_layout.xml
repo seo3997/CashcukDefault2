@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/item_margin_left"
+        android:layout_marginRight="@dimen/item_margin_left"
+        android:background="@drawable/popbg"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/item_padding">
+
+            <ImageView
+                android:id="@+id/iv_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/logo" />
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/item_margin_left"
+                android:layout_toRightOf="@+id/iv_logo"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@string/str_preview_character_title"
+                android:textColor="@color/color_my_point"
+                android:textSize="@dimen/authentication_txt_size" />
+
+            <ImageButton
+                android:id="@+id/ib_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/btn_preview_charater_select"
+                android:padding="@dimen/item_padding"
+                android:src="@drawable/close_btn" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:background="@color/color_character_popup_line" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_push_img"
+                android:layout_width="match_parent"
+                android:scaleType="fitXY"
+                android:layout_height="@dimen/make_ad_img_height" />
+
+            <ProgressBar
+                android:id="@+id/pb_push_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:background="@color/color_character_popup_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_move_push_list"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="@dimen/item_margin_left"
+                android:text="@string/str_move_push_list"
+                android:textColor="@color/color_my_point"
+                android:textSize="@dimen/login_txt_size" />
+
+            <LinearLayout
+                android:layout_width="@dimen/divider_height"
+                android:layout_height="match_parent"
+                android:background="@color/color_character_popup_line" />
+
+            <TextView
+                android:id="@+id/txt_ad_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="@dimen/item_margin_left"
+                android:text="@string/str_ad_view"
+                android:textColor="@color/color_main_friend_txt"
+                android:textSize="@dimen/login_txt_size"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+    <!--</LinearLayout>-->
+</LinearLayout>

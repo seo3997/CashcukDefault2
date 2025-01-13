@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fl_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.cashcuk.MainTitleBar
+            android:id="@+id/main_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.cashcuk.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/main_title_bar" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_info_change"
+            android:layout_below="@+id/title_bar"
+            android:layout_marginBottom="@dimen/item_padding">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/agreement_margin"
+                android:paddingTop="@dimen/agreement_margin">
+                <!-- 이메일(아이디) -->
+                <TextView
+                    android:id="@+id/txt_email_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/agreement_margin"
+                    android:layout_marginRight="@dimen/agreement_margin"
+                    android:background="@drawable/ad_item_bg"
+                    android:padding="@dimen/item_margin_left"
+                    android:textColor="@color/color_main_friend_txt"
+                    android:textSize="@dimen/input_info_txt_size" />
+
+                <!-- 전화번호 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/agreement_margin"
+                    android:layout_marginRight="@dimen/agreement_margin"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="@drawable/number"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:text="@string/str_phone_number"
+                        android:textColor="@color/color_main_friend_txt"
+                        android:textSize="@dimen/login_find_txt_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_phone_num"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:background="@drawable/number2"
+                        android:padding="@dimen/item_margin_left"
+                        android:textColor="@color/color_input_point_request"
+                        android:textColorHint="@color/color_hint_txt"
+                        android:textSize="@dimen/login_find_txt_size" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_modify_phone_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/agreement_margin"
+                    android:layout_marginRight="@dimen/agreement_margin"
+                    android:layout_marginTop="@dimen/item_padding"
+                    android:background="@drawable/btn_button_selector"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_modify_phone_num"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/input_info_txt_size" />
+
+                <!-- 성별 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/agreement_margin"
+                    android:layout_marginRight="@dimen/agreement_margin"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="@drawable/number"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:text="@string/str_sex"
+                        android:textColor="@color/color_main_friend_txt"
+                        android:textSize="@dimen/login_find_txt_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_sex"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:background="@drawable/number2"
+                        android:padding="@dimen/item_margin_left"
+                        android:textColor="@color/color_input_point_request"
+                        android:textColorHint="@color/color_hint_txt"
+                        android:textSize="@dimen/login_find_txt_size" />
+                </LinearLayout>
+
+                <!-- 생년월일 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/agreement_margin"
+                    android:layout_marginRight="@dimen/agreement_margin"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="@drawable/number"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:text="@string/str_birth_date_title"
+                        android:textColor="@color/color_main_friend_txt"
+                        android:textSize="@dimen/login_find_txt_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_birth_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:background="@drawable/number2"
+                        android:padding="@dimen/item_margin_left"
+                        android:textColor="@color/color_input_point_request"
+                        android:textColorHint="@color/color_hint_txt"
+                        android:textSize="@dimen/login_find_txt_size" />
+                </LinearLayout>
+
+                <!-- 사는 곳 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/agreement_margin"
+                    android:layout_marginRight="@dimen/agreement_margin"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="@drawable/number"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:text="@string/str_residence"
+                        android:textColor="@color/color_main_friend_txt"
+                        android:textSize="@dimen/login_find_txt_size"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_residence"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:background="@drawable/number2"
+                        android:padding="@dimen/item_margin_left">
+
+                        <TextView
+                            android:id="@+id/txt_si_do"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:textColor="@color/color_input_point_request"
+                            android:textColorHint="@color/color_hint_txt"
+                            android:textSize="@dimen/login_find_txt_size" />
+
+                        <TextView
+                            android:id="@+id/txt_si_gun_gu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:layout_marginLeft="@dimen/item_padding"
+                            android:layout_toRightOf="@+id/txt_si_do"
+                            android:textColor="@color/color_input_point_request"
+                            android:textColorHint="@color/color_hint_txt"
+                            android:textSize="@dimen/login_find_txt_size" />
+
+                        <ImageButton
+                            android:id="@+id/ib_residence"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/item_padding"
+                            android:layout_marginRight="@dimen/item_margin_left"
+                            android:background="@null"
+                            android:src="@drawable/btn_stay_modify_selector" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <!-- 추천인 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/agreement_margin"
+                    android:layout_marginRight="@dimen/agreement_margin"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="@drawable/number"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:text="@string/str_nominator"
+                        android:textColor="@color/color_main_friend_txt"
+                        android:textSize="@dimen/login_find_txt_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_recommender"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:background="@drawable/number2"
+                        android:singleLine="true"
+                        android:ellipsize="end"
+                        android:padding="@dimen/item_margin_left"
+                        android:textColor="@color/color_input_point_request"
+                        android:textColorHint="@color/color_hint_txt"
+                        android:textSize="@dimen/login_find_txt_size" />
+                </LinearLayout>
+
+                <!-- 광고 발송 기본정보 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/agreement_margin"
+                    android:background="@drawable/top"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_ad_send_default_info_title"
+                    android:textColor="@color/color_my_point"
+                    android:textSize="@dimen/authentication_txt_size"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shadow" />
+
+                <LinearLayout
+                    android:id="@+id/ll_ad_send_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/agreement_margin"
+                    android:layout_marginRight="@dimen/agreement_margin"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:orientation="vertical" />
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btn_info_change"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/item_margin_left"
+            android:layout_marginLeft="@dimen/agreement_margin"
+            android:layout_marginRight="@dimen/agreement_margin"
+            android:background="@drawable/btn_membership_selector"
+            android:paddingBottom="@dimen/item_margin_left"
+            android:paddingTop="@dimen/item_margin_left"
+            android:text="@string/str_set_info_change"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/input_info_txt_size" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_progress_circle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/loading_intro_animation"
+            />
+    </LinearLayout>
+</FrameLayout>

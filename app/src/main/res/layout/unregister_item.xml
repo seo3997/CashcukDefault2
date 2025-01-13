@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/item_padding"
+    android:paddingLeft="@dimen/item_margin_left"
+    android:paddingRight="@dimen/item_margin_left"
+    android:paddingTop="@dimen/item_padding">
+
+    <RadioButton
+        android:id="@+id/rb_cause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:button="@drawable/rb_chk_selector"
+        android:clickable="false" />
+
+    <TextView
+        android:id="@+id/txt_cause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/item_margin_left"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/authentication_txt_size" />
+
+</LinearLayout>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.cashcuk.MainTitleBar
+        android:id="@+id/main_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.cashcuk.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/agreement_margin">
+
+        <TextView
+            android:id="@+id/txt_input_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/str_input"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/tab_title_txt_size"
+            android:textStyle="bold" />
+
+        <!-- 휴대폰번호 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_margin_left"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="@drawable/number"
+                android:gravity="center"
+                android:paddingBottom="@dimen/item_margin_left"
+                android:paddingTop="@dimen/item_margin_left"
+                android:text="@string/str_phone_number"
+                android:textColor="@color/color_main_friend_txt"
+                android:textSize="@dimen/login_find_txt_size"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_first_num"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/number2"
+                    android:gravity="center"
+                    android:padding="@dimen/item_margin_left"
+                    android:singleLine="true"
+                    android:text="010"
+                    android:textColor="@color/color_input_point_request"
+                    android:textSize="@dimen/login_find_txt_size" />
+
+                <EditText
+                    android:id="@+id/et_middle_num"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_padding"
+                    android:layout_weight="1"
+                    android:background="@drawable/number3"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:padding="@dimen/item_margin_left"
+                    android:singleLine="true"
+                    android:textColor="@color/color_input_point_request"
+                    android:textSize="@dimen/login_find_txt_size" />
+
+                <EditText
+                    android:id="@+id/et_last_num"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_padding"
+                    android:layout_weight="1"
+                    android:background="@drawable/number3"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:padding="@dimen/item_margin_left"
+                    android:singleLine="true"
+                    android:textColor="@color/color_input_point_request"
+                    android:textSize="@dimen/login_find_txt_size" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_call_authentication_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_padding"
+            android:background="@drawable/btn_button_selector"
+            android:paddingBottom="@dimen/item_margin_left"
+            android:paddingTop="@dimen/item_margin_left"
+            android:text="@string/str_find_pwd_authorization_code_send"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/input_info_txt_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_input_info"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_authentication"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/agreement_margin"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:background="@drawable/number"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/item_margin_left"
+                        android:paddingTop="@dimen/item_margin_left"
+                        android:text="@string/str_find_pwd_authorization_code"
+                        android:textColor="@color/color_main_friend_txt"
+                        android:textSize="@dimen/login_find_txt_size"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/et_authentication_num"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="8"
+                        android:background="@drawable/number2"
+                        android:hint="@string/str_find_pwd_authorization_code"
+                        android:inputType="textEmailAddress"
+                        android:padding="@dimen/item_margin_left"
+                        android:singleLine="true"
+                        android:textColor="@color/color_input_point_request"
+                        android:textColorHint="@color/color_hint_txt"
+                        android:textSize="@dimen/login_find_txt_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:background="@drawable/inbg"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left">
+
+                    <TextView
+                        android:id="@+id/txt_wait_authentication"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/item_margin_left"
+                        android:text="@string/str_authentication_time_out_txt"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/authentication_txt_size" />
+
+                    <TextView
+                        android:id="@+id/txt_remaining_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_my_point"
+                        android:textSize="@dimen/sub_title_my_point_txt"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_authentication_ok"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin_left"
+                    android:background="@drawable/btn_membership_selector"
+                    android:paddingBottom="@dimen/item_margin_left"
+                    android:paddingTop="@dimen/item_margin_left"
+                    android:text="@string/str_ok"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/input_info_txt_size" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

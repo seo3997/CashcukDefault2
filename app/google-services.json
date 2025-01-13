@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "773799121339",
+    "firebase_url": "https://cashcuk-263204.firebaseio.com",
+    "project_id": "cashcuk-263204",
+    "storage_bucket": "cashcuk-263204.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773799121339:android:27095ac37553bbff7eb49e",
+        "android_client_info": {
+          "package_name": "com.cashcuk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773799121339-i9h5d85m1k42oqs5didk548g08vpjtq6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXNnyd7Bwk1rJF4_qL0vCBqS4F3sPfROA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "773799121339-i9h5d85m1k42oqs5didk548g08vpjtq6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

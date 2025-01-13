@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/item_margin_left"
+        android:background="@drawable/ad_item_bg"
+        android:orientation="vertical"
+        android:padding="@dimen/item_margin_left">
+
+        <TextView
+            android:id="@+id/txt_ad_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_main_friend_txt"
+            android:textSize="@dimen/sub_title_txt_size"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginBottom="@dimen/item_padding"
+            android:layout_marginTop="@dimen/item_padding"
+            android:background="@drawable/bar4" />
+
+        <!-- 클릭 수 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_margin_left">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/str_ad_click_cnt"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/dlg_title_txt_size"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_view_cnt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/dlg_title_txt_size"
+                    android:text="0"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_padding"
+                    android:text="@string/str_ad_cnt"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/dlg_title_txt_size"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_padding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/str_ad_set_amount"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/dlg_title_txt_size"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_total_ad_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_white"
+                    android:text="0"
+                    android:textSize="@dimen/dlg_title_txt_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_padding"
+                    android:text="@string/str_won"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/dlg_title_txt_size"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_padding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/str_ad_use_cost"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/dlg_title_txt_size"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_use_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_white"
+                    android:text="0"
+                    android:textSize="@dimen/dlg_title_txt_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_padding"
+                    android:text="@string/str_won"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/dlg_title_txt_size"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_padding">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="@string/str_ad_return_cost"
+                android:textColor="@color/color_process_complete"
+                android:textSize="@dimen/dlg_title_txt_size"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txt_retun_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/color_process_complete"
+                    android:textSize="@dimen/dlg_title_txt_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_padding"
+                    android:text="@string/str_won"
+                    android:textColor="@color/color_process_complete"
+                    android:textSize="@dimen/dlg_title_txt_size"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

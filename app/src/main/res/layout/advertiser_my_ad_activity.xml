@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fl_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.cashcuk.MainTitleBar
+            android:id="@+id/main_title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.cashcuk.TitleBar
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- 카테고리 layout -->
+        <LinearLayout
+            android:id="@+id/ll_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/top"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/item_margin_left"
+            android:paddingLeft="@dimen/agreement_margin"
+            android:paddingRight="@dimen/agreement_margin"
+            android:paddingTop="@dimen/item_margin_left">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/item_margin_left"
+                android:layout_weight="8"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rl_category1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/input2"
+                    android:padding="@dimen/item_margin_left">
+
+                    <TextView
+                        android:id="@+id/txt_category1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/ib_category1"
+                        android:textColor="@color/color_input_point_request"
+                        android:textColorHint="@color/color_hint_txt"
+                        android:textSize="@dimen/login_find_txt_size" />
+
+                    <ImageButton
+                        android:id="@+id/ib_category1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/item_margin_left"
+                        android:background="@null"
+                        android:paddingRight="@dimen/item_padding"
+                        android:src="@drawable/btn_category_arrow_selector" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_low_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_padding"
+                    android:background="@drawable/input2"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/item_margin_left"
+                    android:visibility="gone">
+
+                    <RelativeLayout
+                        android:id="@+id/rl_category2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/txt_category2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/ib_category2"
+                            android:textColor="@color/color_input_point_request"
+                            android:textColorHint="@color/color_hint_txt"
+                            android:textSize="@dimen/login_find_txt_size" />
+
+                        <ImageButton
+                            android:id="@+id/ib_category2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/item_margin_left"
+                            android:background="@null"
+                            android:src="@drawable/btn_category_arrow_selector" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/item_margin_left"
+                        android:background="@drawable/bar5" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_category3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/txt_category3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/item_margin_left"
+                            android:layout_toLeftOf="@+id/ib_category3"
+                            android:textColor="@color/color_input_point_request"
+                            android:textColorHint="@color/color_hint_txt"
+                            android:textSize="@dimen/login_find_txt_size" />
+
+                        <ImageButton
+                            android:id="@+id/ib_category3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/item_margin_left"
+                            android:background="@null"
+                            android:paddingRight="@dimen/item_padding"
+                            android:src="@drawable/btn_category_arrow_selector" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_search"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@drawable/btn_ad_search_selector"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/item_margin_left"
+                    android:src="@drawable/search"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/str_search"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/authentication_txt_size"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lv_my_ad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_margin_left"
+            android:layout_marginLeft="@dimen/item_margin_left"
+            android:layout_marginRight="@dimen/item_margin_left"
+            android:layout_marginTop="@dimen/item_margin_left"
+            android:divider="@null"
+            android:listSelector="@android:color/transparent"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/ll_ad_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/str_ad_empty"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/change_pwd_txt_size" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin_left"
+                android:background="@drawable/backimg" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_progress_circle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/loading_intro_animation"
+            />
+    </LinearLayout>
+</FrameLayout>
