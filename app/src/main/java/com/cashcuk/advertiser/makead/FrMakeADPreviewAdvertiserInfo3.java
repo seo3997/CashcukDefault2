@@ -459,7 +459,7 @@ public class FrMakeADPreviewAdvertiserInfo3 extends Fragment implements OnMapRea
             }else {
                 ivMapErr.setVisibility(View.GONE);
                 llMap.setVisibility(View.VISIBLE);
-                displayMap(result);
+                //displayMap(result);
             }
         }
     }
@@ -471,6 +471,7 @@ public class FrMakeADPreviewAdvertiserInfo3 extends Fragment implements OnMapRea
     private LatLng position;
     private String[] strLocation;
     public void displayMap(String location) {
+        /*
         strLocation = location.split("/");
         position = new LatLng(Double.parseDouble(strLocation[0]), Double.parseDouble(strLocation[1]));
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager().findFragmentById(R.id.map_info);
@@ -481,6 +482,7 @@ public class FrMakeADPreviewAdvertiserInfo3 extends Fragment implements OnMapRea
         }
 
         mapFragment.getMapAsync(this);
+         */
     }
 
     private GoogleMap mMap;

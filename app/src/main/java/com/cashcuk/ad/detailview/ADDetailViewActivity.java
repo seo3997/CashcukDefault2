@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -50,22 +49,10 @@ import org.apache.http.util.EntityUtils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.StringReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * 광고보기(상세보기)
@@ -142,35 +129,31 @@ public class ADDetailViewActivity extends FragmentActivity {
 
     private ListADInfo getADInfo = new ListADInfo();
 
-    private ExecutorService executor = Executors.newSingleThreadExecutor();
-    private Handler mainHandler = new Handler(Looper.getMainLooper());
-
     /**
      * 결과 값 받는 handler
      */
-    private Handler handler = new Handler(Looper.getMainLooper()) {
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
                 case StaticDataInfo.RESULT_CODE_ERR:
-                    if (msg.arg1 != SAVE_POINT) {
+                    if(msg.arg1!=SAVE_POINT){
                         Toast.makeText(ADDetailViewActivity.this, getResources().getString(R.string.str_http_error), Toast.LENGTH_SHORT).show();
                         finish();
-                    } else {
+                    }else{
                         Toast.makeText(ADDetailViewActivity.this, getResources().getString(R.string.str_http_error_no_save), Toast.LENGTH_SHORT).show();
                     }
                     break;
                 case StaticDataInfo.RESULT_CODE_200:
-                    if (msg.arg1 == SAVE_POINT) {
+                    if(msg.arg1 == SAVE_POINT) {
                         Toast.makeText(ADDetailViewActivity.this, getResources().getString(R.string.str_save_point), Toast.LENGTH_SHORT).show();
-                    } else {
-                        if (mAdapter == null) {
+                    }else {
+                        if(mAdapter==null) {
                             mAdapter = new DetailPagerAdapter(getSupportFragmentManager());
                             vpDetail.setAdapter(mAdapter);
                             vpDetail.setCurrentItem(THIS_PAGE_1);
-
-                            vpDetail.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                            vpDetail.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                                 @Override
                                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -192,30 +175,34 @@ public class ADDetailViewActivity extends FragmentActivity {
 
                                 }
                             });
-                        } else {
+
+                        }else{
                             mAdapter.notifyDataSetChanged();
                         }
                     }
                     break;
                 case StaticDataInfo.RESULT_OVER_SAVE_POINT:
+                    /*
                     Intent intent = new Intent(ADDetailViewActivity.this, DlgBtnActivity.class);
                     intent.putExtra("BtnDlgMsg", getResources().getString(R.string.str_save_point_over));
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                     */
                     break;
                 case StaticDataInfo.RESULT_NO_SAVE_POINT:
                     Toast.makeText(ADDetailViewActivity.this, getResources().getString(R.string.str_no_save_point), Toast.LENGTH_SHORT).show();
                     break;
             }
 
-            handler.post(new Runnable() {
+            handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     if(llProgress!=null && llProgress.isShown()) llProgress.setVisibility(View.GONE);
                 }
-            });
+            },300);
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -296,8 +283,7 @@ public class ADDetailViewActivity extends FragmentActivity {
                     targetFragment = (FrADDetailMain1) fragment;
                     break;
                 case THIS_PAGE_2:
-                    fragment = new FrADDetailMain1();
-                    //fragment = new FrMakeADPreviewAdvertiserInfo3();
+                    fragment = new FrMakeADPreviewAdvertiserInfo3();
                     break;
             }
 
@@ -347,94 +333,51 @@ public class ADDetailViewActivity extends FragmentActivity {
             strTask[i] = k_param.get(i);
         }
 
-        executor.execute(() -> {
-            String result = doInBackground(strTask);
-            mainHandler.post(() -> onPostExecute(result));
-        });
+        new DataTask().execute(strTask);
     }
 
-    private String doInBackground(String... params) {
-        String retMsg = "";
-        HttpURLConnection urlConnection = null;
-        try {
-            URL url = new URL(params[StaticDataInfo.SEND_URL]);
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("POST");
-            urlConnection.setConnectTimeout(StaticDataInfo.TIME_OUT);
-            urlConnection.setReadTimeout(StaticDataInfo.TIME_OUT);
-            urlConnection.setDoInput(true);
-            urlConnection.setDoOutput(true);
+    /**
+     * 서버에 값 요청
+     */
+    private class DataTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String retMsg = "";
 
-            List<NameValuePair> listParams = new ArrayList<>();
-            listParams.add(new BasicNameValuePair(getResources().getString(R.string.str_token), params[StaticDataInfo.SEND_TOKEN]));
-            listParams.add(new BasicNameValuePair(STR_AD_IDX, params[SEND_AD_IDX]));
-            listParams.add(new BasicNameValuePair(STR_AD_KIND, params[SEND_AD_KIND]));
+            try {
+                HttpParams httpParams = new BasicHttpParams();
+                httpParams.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
+                HttpClient client = new DefaultHttpClient(httpParams);
+                HttpPost post = new HttpPost(params[StaticDataInfo.SEND_URL]);
 
-            String postData = getPostDataString(listParams);
+                List<NameValuePair> listParams = new ArrayList<NameValuePair>();
+                listParams.add(new BasicNameValuePair(getResources().getString(R.string.str_token), params[StaticDataInfo.SEND_TOKEN]));
+                listParams.add(new BasicNameValuePair(STR_AD_IDX, params[SEND_AD_IDX]));
+                listParams.add(new BasicNameValuePair(STR_AD_KIND, params[SEND_AD_KIND]));
 
-            OutputStream os = urlConnection.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-            writer.write(postData);
-            writer.flush();
-            writer.close();
-            os.close();
+                httpParams = client.getParams();
+                HttpConnectionParams.setConnectionTimeout(httpParams, StaticDataInfo.TIME_OUT);
+                HttpConnectionParams.setSoTimeout(httpParams, StaticDataInfo.TIME_OUT);
+                UrlEncodedFormEntity ent = new UrlEncodedFormEntity(listParams, HTTP.UTF_8);
+                post.setEntity(ent);
+                HttpResponse responsePOST = client.execute(post);
+                HttpEntity resEntity = responsePOST.getEntity();
 
-            int responseCode = urlConnection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                retMsg = readStream(urlConnection.getInputStream());
-            } else {
-                retMsg = "Error: " + responseCode;
-            }
-        } catch (Exception e) {
-            retMsg = e.toString();
-        } finally {
-            if (urlConnection != null) {
-                urlConnection.disconnect();
-            }
-        }
-        return retMsg;
-    }
-
-    private String getPostDataString(List<NameValuePair> params) throws Exception {
-        StringBuilder result = new StringBuilder();
-        boolean first = true;
-        for (NameValuePair pair : params) {
-            if (first)
-                first = false;
-            else
-                result.append("&");
-            result.append(URLEncoder.encode(pair.getName(), "UTF-8"));
-            result.append("=");
-            result.append(URLEncoder.encode(pair.getValue(), "UTF-8"));
-        }
-        return result.toString();
-    }
-
-    private String readStream(InputStream in) throws IOException {
-        BufferedReader reader = null;
-        StringBuilder sb = new StringBuilder();
-        try {
-            reader = new BufferedReader(new InputStreamReader(in));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (resEntity != null) {
+                    retMsg = EntityUtils.toString(resEntity);
                 }
+            } catch (Exception e) {
+                retMsg = e.toString();
             }
-        }
-        return sb.toString();
-    }
 
-    private void onPostExecute(String result) {
-        ResultADList(result);
+            return retMsg;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            ResultADList(result);
+        }
     }
 
     private ADDetailInfo mADDetailInfo;

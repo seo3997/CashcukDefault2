@@ -15,14 +15,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleCoroutineScope;
-import androidx.lifecycle.LifecycleOwner;
+import androidx.fragment.app.FragmentActivity;
 
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -42,6 +39,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.cashcuk.R;
@@ -86,17 +85,9 @@ import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.StringReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -104,13 +95,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import kotlinx.coroutines.Dispatchers;
 
 /**
  * 광고 보기 - 상세보기
@@ -195,11 +181,7 @@ public class FrADDetailMain1 extends Fragment implements View.OnClickListener, V
     private final String STR_AD_GRADE = "ad_rating"; //평점
     private ProgressBar pbTitleImg;
 
-    private final int SEND_URL = 0;
-    private final int SEND_TOKEN = 1;
-    private ExecutorService executor = Executors.newSingleThreadExecutor();
-    private Handler mainHandler = new Handler(Looper.getMainLooper());
-
+    /*
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -209,11 +191,26 @@ public class FrADDetailMain1 extends Fragment implements View.OnClickListener, V
             throw new ClassCastException(mActivity.toString() + " must implement OnArticleSelectedListener");
         }
     }
+    */
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof FragmentActivity) {
+            mActivity = (FragmentActivity) context;
+        } else {
+            // Context가 FragmentActivity가 아닌 경우에 대한 처리
+            mActivity = null;
+        }
+        try {
+        } catch (ClassCastException e) {
+            throw new ClassCastException(mActivity.toString() + " must implement OnArticleSelectedListener");
+        }
+    }
 
     /**
      * 결과 값 받는 handler
      */
-    private Handler handler = new Handler(Looper.getMainLooper()) {
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -355,12 +352,14 @@ public class FrADDetailMain1 extends Fragment implements View.OnClickListener, V
     @Override
     public void onDestroy() {
         super.onDestroy();
+        /*
         Drawable dTitle = ivTitle.getDrawable();
         if(dTitle instanceof BitmapDrawable){
             Bitmap bitmap = ((BitmapDrawable)dTitle).getBitmap();
             bitmap.recycle();
             bitmap = null;
         }
+        */
     }
 
     /**
@@ -369,7 +368,6 @@ public class FrADDetailMain1 extends Fragment implements View.OnClickListener, V
     private Dialog mMenuDlg;
     private ArrayList<String> arrString;
     private Button btn1; //취소
-
     public void MenuList() {
         mMenuDlg = new Dialog(mActivity);
         mMenuDlg.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -483,6 +481,7 @@ public class FrADDetailMain1 extends Fragment implements View.OnClickListener, V
             intent.putExtra("Path", mADDetailInfo.getStrTitleImgUrl().replace("\\", "//"));
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         }
+
         if(intent != null){
             startActivity(intent);
         }
@@ -505,7 +504,7 @@ public class FrADDetailMain1 extends Fragment implements View.OnClickListener, V
             strTask[i] = k_param.get(i);
         }
 
-        requestData(strTask);
+        new DataTask().execute(strTask);
     }
 
     public void likeADState(String likeType){
@@ -526,7 +525,7 @@ public class FrADDetailMain1 extends Fragment implements View.OnClickListener, V
             strTask[i] = k_param.get(i);
         }
 
-        requestData(strTask);
+        new DataTask().execute(strTask);
     }
 
     /**
@@ -555,114 +554,64 @@ public class FrADDetailMain1 extends Fragment implements View.OnClickListener, V
             strTask[i] = k_param.get(i);
         }
 
-        requestData(strTask);
+        new DataTask().execute(strTask);
     }
 
     /**
      * 서버에 값 요청
      */
-    public void requestData(String[] params) {
-        executor.execute(() -> {
-            String result = doInBackground(params);
-            mainHandler.post(() -> onPostExecute(result));
-        });
-    }
-    private String doInBackground(String... params) {
-        String retMsg = "";
-        HttpURLConnection urlConnection = null;
-        try {
-            URL url = new URL(params[SEND_URL]);
-            urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("POST");
-            urlConnection.setConnectTimeout(StaticDataInfo.TIME_OUT);
-            urlConnection.setReadTimeout(StaticDataInfo.TIME_OUT);
-            urlConnection.setDoOutput(true);
-            urlConnection.setDoInput(true);
+    private class DataTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String retMsg = "";
 
-            // Set request headers
-            urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            try {
+                HttpParams httpParams = new BasicHttpParams();
+                httpParams.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
+                HttpClient client = new DefaultHttpClient(httpParams);
+                HttpPost post = new HttpPost(params[StaticDataInfo.SEND_URL]);
 
-            // Create POST data
-            String postData = getPostDataString(params);
+                List<NameValuePair> listParams = new ArrayList<NameValuePair>();
+                listParams.add(new BasicNameValuePair(mActivity.getResources().getString(R.string.str_token), params[StaticDataInfo.SEND_TOKEN]));
+                listParams.add(new BasicNameValuePair(STR_AD_IDX, params[SEND_AD_IDX]));
+                if(strMode.equals(STR_AD_STOP) || strMode.equals(STR_AD_STOP_CANCEL) || strMode.equals(STR_AD_REQUEST_CANCEL)) {
+                    listParams.add(new BasicNameValuePair(STR_AD_MODE, params[SEND_AD_MODE]));
+                }else if(strMode.equals(STR_AD_LIKE)){
+                    listParams.add(new BasicNameValuePair(STR_AD_LIKE_TYPE, params[SEND_AD_LIKE_TYPE]));
+                }else if(strMode.equals(STR_AD_GREADE)){
+                    listParams.add(new BasicNameValuePair(STR_AD_RATING, params[SEND_AD_RATING]));
+                }
 
-            // Write POST data to the output stream
-            OutputStream os = urlConnection.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
-            writer.write(postData);
-            writer.flush();
-            writer.close();
-            os.close();
+                httpParams = client.getParams();
+                HttpConnectionParams.setConnectionTimeout(httpParams, StaticDataInfo.TIME_OUT);
+                HttpConnectionParams.setSoTimeout(httpParams, StaticDataInfo.TIME_OUT);
+                UrlEncodedFormEntity ent = new UrlEncodedFormEntity(listParams, HTTP.UTF_8);
+                post.setEntity(ent);
+                HttpResponse responsePOST = client.execute(post);
+                HttpEntity resEntity = responsePOST.getEntity();
 
-            int responseCode = urlConnection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                retMsg = readResponse(urlConnection.getInputStream());
-            } else {
-                retMsg = String.valueOf(responseCode);
-                Log.e("DataTask", "HTTP error code: " + responseCode);
+                if (resEntity != null) {
+                    retMsg = EntityUtils.toString(resEntity);
+                }
+            } catch (Exception e) {
+                retMsg = e.toString();
             }
-        } catch (Exception e) {
-            retMsg = e.toString();
-            Log.e("DataTask", "Error during network request", e);
-        } finally {
-            if (urlConnection != null) {
-                urlConnection.disconnect();
+
+            return retMsg;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            if(result.equals(String.valueOf(StaticDataInfo.RESULT_CODE_200))){
+                handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_200);
+                if(strMode.equals(STR_AD_GREADE)){
+                    mAppraisal=0;
+                    new ratingTask().execute();
+                }
+            }else{
+                handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_ERR);
             }
-        }
-        return retMsg;
-    }
-
-    private String getPostDataString(String... params) throws Exception {
-        Map<String, String> postDataParams = new HashMap<>();
-        postDataParams.put(getResources().getString(R.string.str_token), params[SEND_TOKEN]);
-        postDataParams.put(STR_AD_IDX, params[SEND_AD_IDX]);
-
-        if (strMode.equals(STR_AD_STOP) || strMode.equals(STR_AD_STOP_CANCEL) || strMode.equals(STR_AD_REQUEST_CANCEL)) {
-            postDataParams.put(STR_AD_MODE, params[SEND_AD_MODE]);
-        } else if (strMode.equals(STR_AD_LIKE)) {
-            postDataParams.put(STR_AD_LIKE_TYPE, params[SEND_AD_LIKE_TYPE]);
-        } else if (strMode.equals(STR_AD_GREADE)) {
-            postDataParams.put(STR_AD_RATING, params[SEND_AD_RATING]);
-        }
-
-        StringBuilder result = new StringBuilder();
-        boolean first = true;
-        for (Map.Entry<String, String> entry : postDataParams.entrySet()) {
-            if (first)
-                first = false;
-            else
-                result.append("&");
-
-            result.append(java.net.URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8.name()));
-            result.append("=");
-            result.append(java.net.URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8.name()));
-        }
-
-        return result.toString();
-    }
-
-
-    private String readResponse(InputStream inputStream) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-        StringBuilder stringBuilder = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            stringBuilder.append(line);
-        }
-        reader.close();
-        return stringBuilder.toString();
-    }
-
-    private void onPostExecute(String result) {
-        if(result.equals(String.valueOf(StaticDataInfo.RESULT_CODE_200))){
-            handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_200);
-            /*
-            if(strMode.equals(STR_AD_GREADE)){
-                mAppraisal=0;
-                new ratingTask().execute();
-            }
-             */
-        }else{
-            handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_ERR);
         }
     }
 
@@ -735,6 +684,7 @@ public class FrADDetailMain1 extends Fragment implements View.OnClickListener, V
                 }
 
                 mAppraisal = v.getId()+1;
+
                  */
 
         }
@@ -839,7 +789,44 @@ public class FrADDetailMain1 extends Fragment implements View.OnClickListener, V
         if(mADDetailInfo!=null) {
             if(pbTitleImg!=null && !pbTitleImg.isShown()) pbTitleImg.setVisibility(View.VISIBLE);
             String strTitleUrl = mADDetailInfo.getStrTitleImgUrl().replace("\\", "//");
+
+
+
             ImageLoader.loadImage(mActivity, strTitleUrl, ivTitle, pbTitleImg);
+
+            /*
+            pbTitleImg.setVisibility(View.GONE);
+            Glide
+                    .with(mActivity)
+                    .load(strTitleUrl.replace("\\", "//"))
+                    .centerCrop()
+                    .placeholder(R.drawable.image_none)
+                    .into(ivTitle);
+
+
+            Glide.with(mActivity)
+            .load(strTitleUrl)
+            .centerCrop()
+            .addListener(new RequestListener<Drawable>() {
+                @Override
+                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                    if (pbTitleImg != null) {
+                        pbTitleImg.setVisibility(View.GONE);
+                    }
+                    return false; // Glide가 오류를 처리하도록 false 반환
+                }
+
+                @Override
+                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                    if (pbTitleImg != null) {
+                        pbTitleImg.setVisibility(View.GONE);
+                    }
+                    return false; // Glide가 리소스를 처리하도록 false 반환
+                }
+            })
+            .into(ivTitle);
+
+             */
 
             txtADName.setText(mADDetailInfo.getStrADName());
             txtADDetail.setText(mADDetailInfo.getStrDetailTxt());
@@ -871,9 +858,11 @@ public class FrADDetailMain1 extends Fragment implements View.OnClickListener, V
                 btnAddMyAD.setText(mActivity.getResources().getString(R.string.str_interest_add));
             }
 
+            /*
             if(!mADDetailInfo.getStrADAddress().equals("")) {
                 new getLatLng().execute(mADDetailInfo.getStrADAddress());
             }
+             */
 
             chkDateDisplayBtn(mADDetailInfo.getStrDateS(), mADDetailInfo.getStrDateE(), false, getADInfo);
         }
@@ -1080,7 +1069,7 @@ public class FrADDetailMain1 extends Fragment implements View.OnClickListener, V
             }else {
                 ivMapErr.setVisibility(View.GONE);
                 llMap.setVisibility(View.VISIBLE);
-                //displayMap(result);
+                displayMap(result);
             }
         }
     }
