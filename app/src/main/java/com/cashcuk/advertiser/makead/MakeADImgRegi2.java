@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -26,6 +28,12 @@ import com.cashcuk.common.ImageLoader;
 import com.cashcuk.dialog.DlgBtnActivity;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -49,6 +57,7 @@ public class MakeADImgRegi2 extends LinearLayout implements View.OnClickListener
 
     private String STR_TITLE_IMG = "Title";
     private String STR_DETAIL_IMG = "Detail";
+    private String imageFilePath; // imageFilePath 변수 선언 (클래스 멤버 변수)
 
     public MakeADImgRegi2(Context context) {
         super(context);
@@ -272,7 +281,95 @@ public class MakeADImgRegi2 extends LinearLayout implements View.OnClickListener
             }
         }
     }
+    public void setImg(Uri fileUri, String strKind) {
+        Bitmap bitImgSize = null;
+        String strPath = null;
 
+        try {
+            // ContentResolver를 사용하여 Uri에서 InputStream을 얻습니다.
+            InputStream inputStream = mContext.getContentResolver().openInputStream(fileUri);
+            if (inputStream != null) {
+                // BitmapFactory.decodeStream()을 사용하여 InputStream에서 Bitmap을 생성합니다.
+                bitImgSize = BitmapFactory.decodeStream(inputStream);
+                //이미지 크기 조절
+                bitImgSize = Bitmap.createScaledBitmap(bitImgSize, Integer.parseInt(mContext.getResources().getString(R.string.str_ad_char_w)), Integer.parseInt(mContext.getResources().getString(R.string.str_ad_h)), false);
+                inputStream.close();
+            }
+            // Bitmap을 파일로 저장합니다.
+            File file = createImageFile();
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            bitImgSize.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+            // 저장된 파일의 경로를 얻습니다.
+            strPath = file.getAbsolutePath();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (bitImgSize == null) {
+            // Bitmap 생성 실패 처리
+            return;
+        }
+
+        if (strKind.equals(STR_TITLE_IMG)) {
+            ivDetailTitle.setVisibility(View.GONE);
+            txtDetailTitle.setVisibility(View.GONE);
+            ivTitle.setVisibility(View.GONE);
+            llTitleImg.setVisibility(View.VISIBLE);
+
+            strTitleImgPath = strPath;
+            isChangeTitleImg = true;
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                llTitleImg.setBackground(new BitmapDrawable(mContext.getResources(), bitImgSize));
+            } else {
+                llTitleImg.setBackgroundDrawable(new BitmapDrawable(mContext.getResources(), bitImgSize));
+            }
+        } else if (strKind.equals(STR_DETAIL_IMG)) {
+            LinearLayout llDeatilImg = (LinearLayout) selView.findViewById(R.id.ll_detail_img);
+            llDeatilImg.setVisibility(View.VISIBLE);
+
+            ImageView ivDetailImg = (ImageView) selView.findViewById(R.id.iv_detail_img);
+            ivDetailImg.setVisibility(View.GONE);
+
+            ((ImageView) selView.findViewById(R.id.iv_img_ad_detail)).setVisibility(View.GONE);
+            ((TextView) selView.findViewById(R.id.txt_detail)).setVisibility(View.GONE);
+
+            arrIsChangeDetailImgTemp.set((Integer) selView.getTag(), true);
+            hmDetailPos.put((Integer) selView.getTag(), strPath);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                llDeatilImg.setBackground(new BitmapDrawable(mContext.getResources(), bitImgSize));
+            } else {
+                llDeatilImg.setBackgroundDrawable(new BitmapDrawable(mContext.getResources(), bitImgSize));
+            }
+        }
+    }
+    //createImageFile() 함수 추가
+    public File createImageFile() throws IOException {
+        // Create an image file name
+        java.util.Date date = new java.util.Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        String timeStamp = dateFormat.format(date);
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        if (storageDir == null) {
+            // 저장 디렉토리를 찾을 수 없는 경우 예외 발생
+            throw new IOException("저장 디렉토리를 찾을 수 없습니다.");
+        }
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        imageFilePath = image.getAbsolutePath();
+        return image;
+    }
     /**
      * 타이틀 or 세부 이미지 삭제
      */

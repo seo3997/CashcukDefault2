@@ -9,11 +9,10 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
-import androidx.fragment.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,7 +32,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.cashcuk.MainActivity;
 import com.cashcuk.R;
@@ -41,31 +40,13 @@ import com.cashcuk.StaticDataInfo;
 import com.cashcuk.ad.detailview.ADDetailViewActivity;
 import com.cashcuk.common.CommCode;
 import com.cashcuk.common.CommCodeAdapter;
+import com.cashcuk.common.CommonDataTask;
 import com.cashcuk.membership.txtlistdata.TxtListDataInfo;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpVersion;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.CoreProtocolPNames;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
-
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
 
 
 /**
@@ -174,7 +155,7 @@ public class FrListAD extends Fragment implements View.OnClickListener, View.OnT
     /**
      * 결과 값 받는 handler
      */
-    private Handler handler = new Handler() {
+    private Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -335,8 +316,7 @@ public class FrListAD extends Fragment implements View.OnClickListener, View.OnT
     private  ArrayList<TxtListDataInfo> chkNoBuyCharCategory(ArrayList<TxtListDataInfo> arrData){
         ArrayList<TxtListDataInfo> tmp = new ArrayList<TxtListDataInfo>();
         for(int i = 0; i<arrData.size(); i++){
-            if(!arrData.get(i).getStrIdx().startsWith(StaticDataInfo.STRING_N))
-            tmp.add(arrData.get(i));
+            if(!arrData.get(i).getStrIdx().startsWith(StaticDataInfo.STRING_N)) tmp.add(arrData.get(i));
         }
 
         return tmp;
@@ -730,7 +710,7 @@ public class FrListAD extends Fragment implements View.OnClickListener, View.OnT
 
         SharedPreferences pref = mActivity.getSharedPreferences("TokenInfo", mActivity.MODE_PRIVATE);
         token = pref.getString(mActivity.getResources().getString(R.string.str_token), "");
-        HashMap<Integer, String> k_param = new HashMap<Integer, String>();
+        HashMap<String, String> k_param = new HashMap<String, String>();
 
         if(txtCategory1.getText().toString().equals("지역")){                                               //지역 선택시
             if(txtCategory2.getText().toString().equals("") || txtCategory3.getText().toString().equals("")){
@@ -739,24 +719,26 @@ public class FrListAD extends Fragment implements View.OnClickListener, View.OnT
             }
 
             url = getResources().getString(R.string.str_new_url) + getResources().getString(R.string.str_advertise_areaadlist);
-            k_param = new HashMap<Integer, String>();
-            k_param.put(StaticDataInfo.SEND_URL, url);
-            k_param.put(StaticDataInfo.SEND_TOKEN, token);
-            k_param.put(SEND_PAGE_NO, String.valueOf(mPageNo));
-            k_param.put(SEND_SCH_STEP1, strGroupIdx);
-            k_param.put(SEND_SCH_STEP2, txtCategory2.getText().toString());
-            k_param.put(SEND_SCH_STEP3, txtCategory3.getText().toString());
-            k_param.put(SEND_AD_CODE, STR_AD_CODE_AC);
+            k_param = new HashMap<String, String>();
+            k_param.put(mActivity.getResources().getString(R.string.str_token), token);
+            k_param.put(STR_PAGE_NO, String.valueOf(mPageNo));
+            k_param.put(STR_SCH_STEP1, strGroupIdx);
+            k_param.put(STR_SCH_STEP2, txtCategory2.getText().toString());
+            if(!strChildIdx2.equals("")){
+                k_param.put(STR_SCH_STEP3, txtCategory3.getText().toString());
+            }
+            k_param.put(STR_AD_CODE, STR_AD_CODE_AC);
         }else{
             url = getResources().getString(R.string.str_new_url) + getResources().getString(R.string.str_advertise);
-            k_param = new HashMap<Integer, String>();
-            k_param.put(StaticDataInfo.SEND_URL, url);
-            k_param.put(StaticDataInfo.SEND_TOKEN, token);
-            k_param.put(SEND_PAGE_NO, String.valueOf(mPageNo));
-            k_param.put(SEND_SCH_STEP1, strGroupIdx);
-            k_param.put(SEND_SCH_STEP2, strChildIdx1);
-            k_param.put(SEND_SCH_STEP3, strChildIdx2);
-            k_param.put(SEND_AD_CODE, STR_AD_CODE_AC);
+            k_param = new HashMap<String, String>();
+            k_param.put(mActivity.getResources().getString(R.string.str_token), token);
+            k_param.put(STR_PAGE_NO, String.valueOf(mPageNo));
+            k_param.put(STR_SCH_STEP1, strGroupIdx);
+            k_param.put(STR_SCH_STEP2, strChildIdx1);
+            if(!strChildIdx2.equals("")){
+                k_param.put(STR_SCH_STEP3, txtCategory3.getText().toString());
+            }
+            k_param.put(STR_AD_CODE, STR_AD_CODE_AC);
         }
 
 
@@ -765,7 +747,35 @@ public class FrListAD extends Fragment implements View.OnClickListener, View.OnT
             strTask[i] = k_param.get(i);
         }
 
-        new DataTask().execute(strTask);
+
+        CommonDataTask.DataTaskCallback callback = new CommonDataTask.DataTaskCallback() {
+            @Override
+            public void onPreExecute() {
+                // 네트워크 요청 시작 전에 UI 업데이트 (예: 프로그레스바 표시)
+                Log.d("CommonDataTask", "onPreExecute");
+                if (llProgress != null && !llProgress.isShown()) {
+                    llProgress.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onPostExecute(String result) {
+                // 네트워크 요청 완료 후 결과 처리
+                Log.d("CommonDataTask", "onPostExecute: " + result);
+                ResultADList(result);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                // 네트워크 요청 중 에러 발생 시 처리
+                Log.e("CommonDataTask", "onError", e);
+                handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_ERR);
+            }
+        };
+
+        CommonDataTask task = new CommonDataTask(url, k_param, callback);
+        task.execute();
+
     }
 
     @Override
@@ -794,62 +804,6 @@ public class FrListAD extends Fragment implements View.OnClickListener, View.OnT
         }
 
         return false;
-    }
-
-    /**
-     * 서버에 값 요청
-     */
-    private class DataTask extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            if(llProgress!=null && !llProgress.isShown()) llProgress.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            String retMsg = "";
-
-            try {
-                HttpParams httpParams = new BasicHttpParams();
-                httpParams.setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
-                HttpClient client = new DefaultHttpClient(httpParams);
-                HttpPost post = new HttpPost(params[StaticDataInfo.SEND_URL]);
-                List<NameValuePair> listParams = new ArrayList<NameValuePair>();
-                listParams.add(new BasicNameValuePair(mActivity.getResources().getString(R.string.str_token), params[StaticDataInfo.SEND_TOKEN]));
-                listParams.add(new BasicNameValuePair(STR_PAGE_NO, params[SEND_PAGE_NO]));
-                listParams.add(new BasicNameValuePair(STR_AD_CODE, params[SEND_AD_CODE]));
-                listParams.add(new BasicNameValuePair(STR_SCH_STEP1, params[SEND_SCH_STEP1]));
-                listParams.add(new BasicNameValuePair(STR_SCH_STEP2, params[SEND_SCH_STEP2]));
-                if(!strChildIdx2.equals("")){
-                    listParams.add(new BasicNameValuePair(STR_SCH_STEP3, params[SEND_SCH_STEP3]));
-                }
-
-                httpParams = client.getParams();
-                HttpConnectionParams.setConnectionTimeout(httpParams, StaticDataInfo.TIME_OUT);
-                HttpConnectionParams.setSoTimeout(httpParams, StaticDataInfo.TIME_OUT);
-                UrlEncodedFormEntity ent = new UrlEncodedFormEntity(listParams, HTTP.UTF_8);
-                post.setEntity(ent);
-                HttpResponse responsePOST = client.execute(post);
-                HttpEntity resEntity = responsePOST.getEntity();
-
-                if (resEntity != null) {
-                    retMsg = EntityUtils.toString(resEntity);
-                }
-            } catch (Exception e) {
-                retMsg = e.toString();
-            }
-
-            return retMsg;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
-            ResultADList(result);
-        }
     }
 
     private ListADInfo mListADInfo;

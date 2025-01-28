@@ -15,11 +15,13 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -50,6 +52,7 @@ import com.cashcuk.ad.adlist.ListADInfo;
 import com.cashcuk.advertiser.makead.MakeADMainActivity;
 import com.cashcuk.advertiser.sendpush.ADPushSendCurrentState;
 import com.cashcuk.advertiser.sendpush.ADTargetSendActivity;
+import com.cashcuk.common.CommonDataTask;
 import com.cashcuk.common.ImageLoader;
 import com.cashcuk.dialog.DlgBtnActivity;
 import com.cashcuk.dialog.DlgImgZoom;
@@ -210,7 +213,7 @@ public class FrADDetailMain1 extends Fragment implements View.OnClickListener, V
     /**
      * 결과 값 받는 handler
      */
-    private Handler handler = new Handler() {
+    private Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -493,18 +496,42 @@ public class FrADDetailMain1 extends Fragment implements View.OnClickListener, V
         SharedPreferences pref = mActivity.getSharedPreferences("TokenInfo", mActivity.MODE_PRIVATE);
         final String token = pref.getString(getResources().getString(R.string.str_token), "");
 
-        HashMap<Integer, String> k_param = new HashMap<Integer, String>();
-        k_param.put(StaticDataInfo.SEND_URL, url);
-        k_param.put(StaticDataInfo.SEND_TOKEN, token);
-        k_param.put(SEND_AD_IDX, strADIdx);
-        k_param.put(SEND_AD_RATING, String.valueOf(mAppraisal));
+        HashMap<String, String> k_param = new HashMap<String, String>();
+        k_param.put(mActivity.getResources().getString(R.string.str_token), token);
+        k_param.put(STR_AD_IDX, strADIdx);
+        k_param.put(STR_AD_RATING, String.valueOf(mAppraisal));
 
-        String[] strTask = new String[k_param.size()];
-        for (int i = 0; i < strTask.length; i++) {
-            strTask[i] = k_param.get(i);
-        }
 
-        new DataTask().execute(strTask);
+        CommonDataTask.DataTaskCallback callback = new CommonDataTask.DataTaskCallback() {
+            @Override
+            public void onPreExecute() {
+                // 네트워크 요청 시작 전에 UI 업데이트 (예: 프로그레스바 표시)
+                Log.d("CommonDataTask", "onPreExecute");
+            }
+
+            @Override
+            public void onPostExecute(String result) {
+                // 네트워크 요청 완료 후 결과 처리
+                Log.d("CommonDataTask", "onPostExecute: " + result);
+                if(result.equals(String.valueOf(StaticDataInfo.RESULT_CODE_200))){
+                    handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_200);
+                }else{
+                    handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_ERR);
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                // 네트워크 요청 중 에러 발생 시 처리
+                Log.e("CommonDataTask", "onError", e);
+                handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_ERR);
+            }
+        };
+
+        CommonDataTask task = new CommonDataTask(url, k_param, callback);
+        task.execute();
+
+        //new DataTask().execute(strTask);
     }
 
     public void likeADState(String likeType){
@@ -513,19 +540,43 @@ public class FrADDetailMain1 extends Fragment implements View.OnClickListener, V
         SharedPreferences pref = mActivity.getSharedPreferences("TokenInfo", mActivity.MODE_PRIVATE);
         final String token = pref.getString(getResources().getString(R.string.str_token), "");
 
-        HashMap<Integer, String> k_param = new HashMap<Integer, String>();
+        HashMap<String, String> k_param = new HashMap<String, String>();
 
-        k_param.put(StaticDataInfo.SEND_URL, url);
-        k_param.put(StaticDataInfo.SEND_TOKEN, token);
-        k_param.put(SEND_AD_IDX, strADIdx);
-        k_param.put(SEND_AD_LIKE_TYPE, likeType);
+        k_param.put(mActivity.getResources().getString(R.string.str_token), token);
+        k_param.put(STR_AD_IDX, strADIdx);
+        k_param.put(STR_AD_LIKE_TYPE, likeType);
 
-        String[] strTask = new String[k_param.size()];
-        for (int i = 0; i < strTask.length; i++) {
-            strTask[i] = k_param.get(i);
-        }
 
-        new DataTask().execute(strTask);
+        CommonDataTask.DataTaskCallback callback = new CommonDataTask.DataTaskCallback() {
+            @Override
+            public void onPreExecute() {
+                // 네트워크 요청 시작 전에 UI 업데이트 (예: 프로그레스바 표시)
+                Log.d("CommonDataTask", "onPreExecute");
+            }
+
+            @Override
+            public void onPostExecute(String result) {
+                // 네트워크 요청 완료 후 결과 처리
+                Log.d("CommonDataTask", "onPostExecute: " + result);
+                if(result.equals(String.valueOf(StaticDataInfo.RESULT_CODE_200))){
+                    handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_200);
+                }else{
+                    handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_ERR);
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                // 네트워크 요청 중 에러 발생 시 처리
+                Log.e("CommonDataTask", "onError", e);
+                handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_ERR);
+            }
+        };
+
+        CommonDataTask task = new CommonDataTask(url, k_param, callback);
+        task.execute();
+
+        //new DataTask().execute(strTask);
     }
 
     /**
@@ -543,23 +594,57 @@ public class FrADDetailMain1 extends Fragment implements View.OnClickListener, V
             url = mActivity.getResources().getString(R.string.str_new_url) + mActivity.getResources().getString(R.string.str_advertise_motion);
         }
 
-        HashMap<Integer, String> k_param = new HashMap<Integer, String>();
-        k_param.put(StaticDataInfo.SEND_URL, url);
-        k_param.put(StaticDataInfo.SEND_TOKEN, token);
-        k_param.put(SEND_AD_IDX, strADIdx);
-        k_param.put(SEND_AD_MODE, mode);
-
-        String[] strTask = new String[k_param.size()];
-        for (int i = 0; i < strTask.length; i++) {
-            strTask[i] = k_param.get(i);
+        HashMap<String, String> k_param = new HashMap<String, String>();
+        k_param.put(mActivity.getResources().getString(R.string.str_token), token);
+        k_param.put(STR_AD_IDX, strADIdx);
+        if(strMode.equals(STR_AD_STOP) || strMode.equals(STR_AD_STOP_CANCEL) || strMode.equals(STR_AD_REQUEST_CANCEL)) {
+            k_param.put(STR_AD_MODE, mode);
+        }else if(strMode.equals(STR_AD_LIKE)){
+            k_param.put(STR_AD_LIKE_TYPE,mode);
+        }else if(strMode.equals(STR_AD_GREADE)){
+            k_param.put(STR_AD_RATING, mode);
         }
 
-        new DataTask().execute(strTask);
+        CommonDataTask.DataTaskCallback callback = new CommonDataTask.DataTaskCallback() {
+            @Override
+            public void onPreExecute() {
+                // 네트워크 요청 시작 전에 UI 업데이트 (예: 프로그레스바 표시)
+                Log.d("CommonDataTask", "onPreExecute");
+            }
+
+            @Override
+            public void onPostExecute(String result) {
+                // 네트워크 요청 완료 후 결과 처리
+                Log.d("CommonDataTask", "onPostExecute: " + result);
+                if(result.equals(String.valueOf(StaticDataInfo.RESULT_CODE_200))){
+                    handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_200);
+                    if(strMode.equals(STR_AD_GREADE)){
+                        mAppraisal=0;
+                        new ratingTask().execute();
+                    }
+                }else{
+                    handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_ERR);
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                // 네트워크 요청 중 에러 발생 시 처리
+                Log.e("CommonDataTask", "onError", e);
+                handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_ERR);
+            }
+        };
+
+        CommonDataTask task = new CommonDataTask(url, k_param, callback);
+        task.execute();
+
+        //new DataTask().execute(strTask);
     }
 
     /**
      * 서버에 값 요청
      */
+/*
     private class DataTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -614,6 +699,7 @@ public class FrADDetailMain1 extends Fragment implements View.OnClickListener, V
             }
         }
     }
+*/
 
     private Dialog mDlg;
     private LinearLayout llAppraisal;

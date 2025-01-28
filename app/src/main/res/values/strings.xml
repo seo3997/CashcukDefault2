@@ -654,7 +654,7 @@
     <string name="str_repush_time">* 발송 후 일정시간이 지나야 재발송 가능합니다.</string>
     <string name="str_push_empty">보관중인 PUSH광고가 없습니다.</string>
     <string name="str_push_img_ingo">* 등록 광고 유도하는 이미지와 메시지로 만드세요.</string>
-    <string name="str_new_url">http://192.168.186.161:8080/</string>
+    <string name="str_new_url">http://192.168.201.163:8080/</string>
     <!--
     <string name="str_new_url">http://cashcuk.com/</string>
     <string name="str_new_url">http://112.175.76.139/</string>

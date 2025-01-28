@@ -43,6 +43,7 @@
                     android:background="@drawable/number2"
                     android:padding="@dimen/item_margin_left"
                     android:singleLine="true"
+                    android:text="aa"
                     android:textColor="@color/color_input_point_request"
                     android:textColorHint="@color/color_hint_txt"
                     android:textSize="@dimen/tab_title_txt_size" />
@@ -77,12 +78,13 @@
                     android:layout_height="match_parent"
                     android:layout_weight="8"
                     android:background="@drawable/number2"
-                    android:maxLines="2"
-                    android:maxLength="100"
-                    android:padding="@dimen/item_margin_left"
                     android:hint="@string/str_max_length"
-                    android:textColorHint="@color/color_hint_txt"
+                    android:maxLength="100"
+                    android:maxLines="2"
+                    android:padding="@dimen/item_margin_left"
+                    android:text="bb"
                     android:textColor="@color/color_input_point_request"
+                    android:textColorHint="@color/color_hint_txt"
                     android:textSize="@dimen/tab_title_txt_size" />
             </LinearLayout>
 
@@ -254,6 +256,7 @@
                             android:inputType="number"
                             android:maxLength="19"
                             android:singleLine="true"
+                            android:text="50000"
                             android:textColor="@color/color_input_point_request"
                             android:textColorHint="@color/color_hint_txt"
                             android:textSize="@dimen/tab_title_txt_size" />
@@ -395,6 +398,7 @@
                         android:inputType="number"
                         android:maxLength="19"
                         android:singleLine="true"
+                        android:text="30"
                         android:textColor="@color/color_input_point_request"
                         android:textColorHint="@color/color_hint_txt"
                         android:textSize="@dimen/tab_title_txt_size" />

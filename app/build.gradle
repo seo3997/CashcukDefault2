@@ -31,18 +31,21 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    implementation("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
-    implementation 'com.github.chrisbanes.photoview:library:1.2.3'
+    implementation("com.github.chrisbanes.photoview:library:1.2.3")
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation 'junit:junit:4.12'
-    implementation 'androidx.appcompat:appcompat:1.7.0'
-    implementation 'com.google.android.gms:play-services-location:21.3.0'
-    implementation 'com.google.android.gms:play-services-maps:19.0.0'
-    implementation 'org.jsoup:jsoup:1.8.3'
-    implementation 'com.google.firebase:firebase-messaging:24.1.0'
-    implementation 'com.android.volley:volley:1.2.1'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
+    testImplementation("junit:junit:4.12")
+    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("com.google.android.gms:play-services-location:21.3.0")
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
+    implementation("org.jsoup:jsoup:1.8.3")
+    implementation("com.google.firebase:firebase-messaging:24.1.0")
+    implementation("com.android.volley:volley:1.2.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("com.squareup.okhttp3:okhttp:4.11.0") // 최신 버전 확인 후 사용 권장
+    implementation("com.vanniktech:android-image-cropper:4.6.0")
+    implementation("com.github.yalantis:ucrop:2.2.8")
 }
 
 apply plugin: 'com.google.gms.google-services'

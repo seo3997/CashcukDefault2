@@ -9,12 +9,15 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -27,6 +30,7 @@ import com.cashcuk.R;
 import com.cashcuk.StaticDataInfo;
 import com.cashcuk.ad.adlist.ListADInfo;
 import com.cashcuk.advertiser.makead.FrMakeADPreviewAdvertiserInfo3;
+import com.cashcuk.common.CommonDataTask;
 import com.cashcuk.common.SavePoint;
 import com.cashcuk.dialog.DlgBtnActivity;
 import com.cashcuk.dialog.DlgChkPwdActivity;
@@ -132,7 +136,7 @@ public class ADDetailViewActivity extends FragmentActivity {
     /**
      * 결과 값 받는 handler
      */
-    private Handler handler = new Handler() {
+    private Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -322,23 +326,43 @@ public class ADDetailViewActivity extends FragmentActivity {
         SharedPreferences pref = getSharedPreferences("TokenInfo", MODE_PRIVATE);
         final String token = pref.getString(getResources().getString(R.string.str_token), "");
 
-        HashMap<Integer, String> k_param = new HashMap<Integer, String>();
-        k_param.put(StaticDataInfo.SEND_URL, url);
-        k_param.put(StaticDataInfo.SEND_TOKEN, token);
-        k_param.put(SEND_AD_IDX, strADIdx);
-        k_param.put(SEND_AD_KIND, strADKind);
+        HashMap<String, String> k_param = new HashMap<String, String>();
+        k_param.put(getResources().getString(R.string.str_token), token);
+        k_param.put(STR_AD_IDX, strADIdx);
+        k_param.put(STR_AD_KIND, strADKind);
 
-        String[] strTask = new String[k_param.size()];
-        for (int i = 0; i < strTask.length; i++) {
-            strTask[i] = k_param.get(i);
-        }
+        CommonDataTask.DataTaskCallback callback = new CommonDataTask.DataTaskCallback() {
+            @Override
+            public void onPreExecute() {
+                // 네트워크 요청 시작 전에 UI 업데이트 (예: 프로그레스바 표시)
+                Log.d("CommonDataTask", "onPreExecute");
+            }
 
-        new DataTask().execute(strTask);
+            @Override
+            public void onPostExecute(String result) {
+                // 네트워크 요청 완료 후 결과 처리
+                Log.d("CommonDataTask", "onPostExecute: " + result);
+                ResultADList(result);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                // 네트워크 요청 중 에러 발생 시 처리
+                Log.e("CommonDataTask", "onError", e);
+                handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_ERR);
+            }
+        };
+
+        CommonDataTask task = new CommonDataTask(url, k_param, callback);
+        task.execute();
+
+        //new DataTask().execute(strTask);
     }
 
     /**
      * 서버에 값 요청
      */
+/*
     private class DataTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -379,6 +403,7 @@ public class ADDetailViewActivity extends FragmentActivity {
             ResultADList(result);
         }
     }
+*/
 
     private ADDetailInfo mADDetailInfo;
     public void ResultADList(String result){

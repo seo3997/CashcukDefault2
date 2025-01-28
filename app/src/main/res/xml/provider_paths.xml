@@ -1,7 +1,3 @@
 <paths>
-    <external-path name="external_sd" path="."/>
-    <external-files-path name="external_app" path="."/>
-    <external-media-path name="external_media" path="." />
-    <files-path name="files" path="."/>
-    <cache-path name="cache" path="."/>
+    <external-files-path name="images" path="Pictures/" />
 </paths>

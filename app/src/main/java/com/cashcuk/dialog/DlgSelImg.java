@@ -28,9 +28,12 @@ import com.cashcuk.R;
 import com.cashcuk.StaticDataInfo;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
+import java.util.Locale;
 
 import static androidx.core.content.FileProvider.getUriForFile;
 
@@ -114,6 +117,29 @@ public class DlgSelImg extends Dialog implements View.OnTouchListener {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = null;
                 if (arrString.get(position).equals(mContext.getResources().getString(R.string.str_camera))) {
+                    intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    // 카메라 앱이 있는지 확인
+                    if (intent.resolveActivity(mContext.getPackageManager()) != null) {
+                        // 사진을 저장할 파일 생성
+                        File photoFile = null;
+                        try {
+                            photoFile = createImageFile();
+                        } catch (IOException ex) {
+                            // 파일 생성 중 오류 발생
+                            ex.printStackTrace();
+                        }
+                        // 파일이 성공적으로 생성되었을 경우에만 진행
+                        if (photoFile != null) {
+                            mImageUri = FileProvider.getUriForFile(mContext,
+                                    mContext.getPackageName() + ".fileprovider",
+                                    photoFile);
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
+                            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                            ((Activity) mContext).startActivityForResult(intent, PICK_FROM_CAMERA);
+                        }
+                    }
+                    /*
                     // 카메라 호출
                     intent = new Intent("android.media.action.IMAGE_CAPTURE");
 
@@ -124,19 +150,13 @@ public class DlgSelImg extends Dialog implements View.OnTouchListener {
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     ((Activity) mContext).startActivityForResult(intent, PICK_FROM_CAMERA);
+*/
                 } else if (arrString.get(position).equals(mContext.getResources().getString(R.string.str_album))) {
                    try{
-                       storeCropImage();
+                       intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                       intent.setType("image/*");
 
-                       intent = new Intent(Intent.ACTION_PICK);
-                       intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
-                       /*
-                       intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                       intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                       mContext.grantUriPermission(mContext.getPackageName(), getPhotoUri() , Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                        */
-                       intent.putExtra(MediaStore.EXTRA_OUTPUT, FileManager.get(mContext).photoUri);
-
+                       //intent.putExtra(MediaStore.EXTRA_OUTPUT, FileManager.get(mContext).photoUri);
                        ((Activity)mContext).startActivityForResult(intent, PICK_FROM_GALLERY);
 
                     } catch (Exception e) {
@@ -155,6 +175,13 @@ public class DlgSelImg extends Dialog implements View.OnTouchListener {
                 dismiss();
             }
         });
+    }
+
+    public File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        File storageDir = mContext.getExternalFilesDir("Pictures");
+        return File.createTempFile("CROP_" + timeStamp, ".jpg", storageDir);
     }
 
     public boolean getDelImg(){
@@ -231,16 +258,17 @@ public class DlgSelImg extends Dialog implements View.OnTouchListener {
      * @return
      */
     public void storeCropImage() {
-
         // crop된 이미지를 저장하기 위한 파일 경로
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmssSSS").format(new Date());
-        String fileName = timeStamp;
-        //String fileName = "cash";
+        //String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmssSSS").format(new Date()); // 기존 코드
+        //String fileName = timeStamp; // 기존 코드
+        String fileName = UUID.randomUUID().toString(); // java.util.UUID 클래스 사용
         Log.d("temp","fileName["+fileName+"]");
 
         try {
-            //Log.d("temp","mContext.getFilesDir()["+mContext.getFilesDir()+"]");
-            File imagePath = Environment.getExternalStorageDirectory();
+            File imagePath = mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES); // 앱 전용 디렉토리 사용
+            if(imagePath==null){
+                throw new IOException("저장 디렉토리를 찾을 수 없습니다.");
+            }
             if(!imagePath.exists()){
                 imagePath.mkdirs();
             }
@@ -255,12 +283,11 @@ public class DlgSelImg extends Dialog implements View.OnTouchListener {
             }
 
 
-        } catch (Exception e) {
-            Log.d("temp","error["+e+"]");
+        } catch (IOException e) { // IOException으로 변경
+            Log.e("temp","error["+e+"]"); // Log.e()로 변경
             e.printStackTrace();
         }
         Log.d("temp","photoUri["+FileManager.get(mContext).photoUri.toString()+"]");
-
     }
 
     /**

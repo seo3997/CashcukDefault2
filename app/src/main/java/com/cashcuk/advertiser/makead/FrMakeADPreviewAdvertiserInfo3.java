@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import android.telephony.PhoneNumberUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import com.bumptech.glide.request.target.Target;
 import com.cashcuk.R;
 import com.cashcuk.StaticDataInfo;
 import com.cashcuk.ad.detailview.ADDetailInfo;
+import com.cashcuk.common.CommonDataTask;
 import com.cashcuk.common.ImageLoader;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -220,13 +222,6 @@ public class FrMakeADPreviewAdvertiserInfo3 extends Fragment implements OnMapRea
         if(pbAdvertiser!=null && pbAdvertiser.isShown()) pbAdvertiser.setVisibility(View.GONE);
     }
 
-    public void requestData(String[] params) {
-        executor.execute(() -> {
-            String result = doInBackground(params);
-            mainHandler.post(() -> onPostExecute(result));
-        });
-    }
-
     /**
      * 서버로 전송하는 값
      */
@@ -236,76 +231,38 @@ public class FrMakeADPreviewAdvertiserInfo3 extends Fragment implements OnMapRea
         final String token = pref.getString(mActivity.getResources().getString(R.string.str_token), "");
 
 //        if(llProgress!=null && !llProgress.isShown()) llProgress.setVisibility(View.VISIBLE);
-        HashMap<Integer, String> k_param = new HashMap<Integer, String>();
-        k_param.put(StaticDataInfo.SEND_URL, url);
-        k_param.put(StaticDataInfo.SEND_TOKEN, token);
+        HashMap<String, String> k_param = new HashMap<String, String>();
+        k_param.put(getResources().getString(R.string.str_token), token);
 
-        String[] strTask = new String[k_param.size()];
-        for (int i = 0; i < strTask.length; i++) {
-            strTask[i] = k_param.get(i);
-        }
-
-        requestData(strTask);
-    }
-
-    /**
-     * 서버에 값 요청
-     */
-
-    private String doInBackground(String... params) {
-        String retMsg = "";
-        String url = params[StaticDataInfo.SEND_URL];
-        String token = params[StaticDataInfo.SEND_TOKEN];
-
-        try {
-            URL obj = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-            // Set connection timeout
-            con.setConnectTimeout(StaticDataInfo.TIME_OUT);
-            con.setReadTimeout(StaticDataInfo.TIME_OUT);
-
-            // Set request method
-            con.setRequestMethod("POST");
-
-            // Set request headers
-            con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-
-            // Set request body
-            String postData = getResources().getString(R.string.str_token) + "=" + token;
-            con.setDoOutput(true);
-            OutputStream os = con.getOutputStream();
-            os.write(postData.getBytes(StandardCharsets.UTF_8));
-            os.flush();
-            os.close();
-
-            int responseCode = con.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                InputStream is = con.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                StringBuilder sb = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-                is.close();
-                retMsg = sb.toString();
-            } else {
-                retMsg = "HTTP Error: " + responseCode;
+        CommonDataTask.DataTaskCallback callback = new CommonDataTask.DataTaskCallback() {
+            @Override
+            public void onPreExecute() {
+                // 네트워크 요청 시작 전에 UI 업데이트 (예: 프로그레스바 표시)
+                Log.d("CommonDataTask", "onPreExecute");
             }
-            con.disconnect();
-        } catch (IOException e) {
-            retMsg = e.toString();
-        }
-        return retMsg;
-    }
 
-    private void onPostExecute(String result) {
-        if (result.startsWith(StaticDataInfo.TAG_LIST)) {
-            resultAdvertiserInfo(result);
-        } else {
-            handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_ERR);
-        }
+            @Override
+            public void onPostExecute(String result) {
+                // 네트워크 요청 완료 후 결과 처리
+                Log.d("CommonDataTask", "onPostExecute: " + result);
+                if (result.startsWith(StaticDataInfo.TAG_LIST)) {
+                    resultAdvertiserInfo(result);
+                } else {
+                    handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_ERR);
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                // 네트워크 요청 중 에러 발생 시 처리
+                Log.e("CommonDataTask", "onError", e);
+                handler.sendEmptyMessage(StaticDataInfo.RESULT_CODE_ERR);
+            }
+        };
+
+        CommonDataTask task = new CommonDataTask(url, k_param, callback);
+        task.execute();
+
     }
 
 

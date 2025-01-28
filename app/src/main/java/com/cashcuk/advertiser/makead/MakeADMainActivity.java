@@ -1,17 +1,26 @@
 package com.cashcuk.advertiser.makead;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.ContentUris;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +29,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+
+import com.canhub.cropper.CropImageContract;
+import com.canhub.cropper.CropImageContractOptions;
 import com.cashcuk.CheckLoginService;
 import com.cashcuk.FileManager;
 import com.cashcuk.R;
@@ -49,12 +65,21 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.StringReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import com.canhub.cropper.CropImage;
+import com.canhub.cropper.CropImageView;
+import com.yalantis.ucrop.UCrop;
 
 /**
  * 광고제작
@@ -127,7 +152,7 @@ public class MakeADMainActivity extends Activity implements View.OnClickListener
 
     public final int REQUEST_MONEY_CHECK = 123;
     private boolean isRejudged = false; //재심사 여부
-
+    private Context mContext;
     /**
      * 결과 값 받는 handler
      */
@@ -164,6 +189,8 @@ public class MakeADMainActivity extends Activity implements View.OnClickListener
         CheckLoginService.mActivityList.add(this);
         ((TitleBar) findViewById(R.id.title_bar)).setTitle(getResources().getString(R.string.str_make_ad));
 
+        mContext = this;
+
         FrameLayout layoutBG = (FrameLayout) findViewById(R.id.fl_bg);
         layoutBG.setBackgroundDrawable(new BitmapDrawable(getResources(), BitmapFactory.decodeResource(getResources(), R.drawable.display_bg)));
 
@@ -193,6 +220,8 @@ public class MakeADMainActivity extends Activity implements View.OnClickListener
         if(!isModify){
             makeADDetail.makeAD();
         }
+        checkPermissionAndPickImage();
+        checkCameraPermission();
 
         new GetChargeAmount(MakeADMainActivity.this, handler);
     }
@@ -457,11 +486,13 @@ public class MakeADMainActivity extends Activity implements View.OnClickListener
     private int mHour, mMin;
     private  String[] strDate;
     private String[] strTime;
+    private Uri imageUri;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK) {
+            Uri cropUri = null;
             Intent intent = null;
             int mRequestCode = -1;
             switch (requestCode) {
@@ -469,6 +500,43 @@ public class MakeADMainActivity extends Activity implements View.OnClickListener
                     finish();
                     break;
                 case DlgSelImg.PICK_FROM_CAMERA:
+                    intent = new Intent("com.android.camera.action.CROP");
+                    intent.setDataAndType(mSelDlg.mImageUri, "image/*");
+
+                    // Crop한 이미지를 저장할 Path
+                    File cropFile = null;
+                    try {
+                        cropFile = mSelDlg.createImageFile();
+                    } catch (IOException ex) {
+                        // Error occurred while creating the File
+                        ex.printStackTrace();
+                    }
+                    if (cropFile != null) {
+                         cropUri = FileProvider.getUriForFile(this,
+                                getPackageName() + ".fileprovider",
+                                cropFile);
+                        //자르기 앱에 cropUri에 대한 권한을 부여합니다.
+                        List<ResolveInfo> resInfoList = getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+                        for (ResolveInfo resolveInfo : resInfoList) {
+                            String packageName = resolveInfo.activityInfo.packageName;
+                            grantUriPermission(packageName, cropUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        }
+                        //grantUriPermission(getPackageName(), cropUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        intent.putExtra("output", cropUri);
+                        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+                        intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    }
+
+                    intent.putExtra("crop", "true");
+                    intent.putExtra("aspectX", 16); // crop 박스의 x축 비율
+                    intent.putExtra("aspectY", 9); // crop 박스의 y축 비율
+                    //intent.putExtra("return-data", false);
+                    //mRequestCode = DlgSelImg.CROP_FROM_CAMERA;
+                    mRequestCode = DlgSelImg.CROP_FROM_GALLERY;
+
+                    isRejudged = true;
+                    /*
                     intent = new Intent("com.android.camera.action.CROP");
                     intent.setDataAndType(mSelDlg.mImageUri, "image/*");
                     // Crop한 이미지를 저장할 Path
@@ -480,6 +548,7 @@ public class MakeADMainActivity extends Activity implements View.OnClickListener
                     mRequestCode = DlgSelImg.CROP_FROM_CAMERA;
 
                     isRejudged = true;
+                    */
                     break;
                 case DlgSelImg.CROP_FROM_CAMERA:
                     File file = new File(mSelDlg.mImageUri.getPath());
@@ -488,23 +557,63 @@ public class MakeADMainActivity extends Activity implements View.OnClickListener
                     }
                 case DlgSelImg.PICK_FROM_GALLERY:
                     isRejudged = true;
-                    cropImage(data, FileManager.get(this).photoUri);
+                    imageUri = data.getData();
+                    Log.d("Gallery URI", "Selected URI: " + imageUri);
+                    if (imageUri != null) {
+                        Log.d("Gallery URI", "packageName: " +getPackageName());
+                        //cropImage(imageUri);
+                        startCrop(imageUri);
+                    }
                     break;
                 case DlgSelImg.CROP_FROM_GALLERY:
-                    /*
-                    String strFilePathName = mSelDlg.getFilePath()+mSelDlg.getFileName();
-                    if(!strFilePathName.equals("")) {
-                        makeADImgRegi.setImg(mSelDlg.getFilePath(), mSelDlg.getFileName(), strImgKind);
+                    cropUri = null;
+                    if(data != null){
+                        cropUri = data.getData();
                     }
-                    */
+                    if(cropUri == null){
+                        //이미지 자르기 앱이 data에 아무것도 반환하지 않은 경우
+                        //cropUri에 이미지가 저장되었는지 확인
+                        cropFile = null;
+                        try {
+                            cropFile = mSelDlg.createImageFile();
+                        } catch (IOException ex) {
+                            // Error occurred while creating the File
+                            ex.printStackTrace();
+                        }
+                        if(cropFile != null){
+                            cropUri = FileProvider.getUriForFile(this,
+                                    getPackageName() + ".fileprovider",
+                                    cropFile);
+                        }
+                    }
+                    if (cropUri != null) {
+                        // cropUri를 사용하여 이미지를 처리
+                        // getRealPathFromURI() 메서드를 사용할 필요가 없습니다.
+                        // makeADImgRegi.setImg(strFilePathName, strImgKind); // 기존 코드
+                        makeADImgRegi.setImg(cropUri, strImgKind); // 수정된 코드
+                    }
+                    /*
                     String strFilePathName=FileManager.get(this).getRealPathFromURI(this,data.getData());
                     if(!strFilePathName.equals("")) {
                         makeADImgRegi.setImg(strFilePathName, strImgKind);
                     }
+                    */
 
                     Log.d("temp","**************MakeADMainActivity onActivityResult CROP_FROM_GALLERY");
                     break;
-
+                case  UCrop.REQUEST_CROP:
+                    Uri croppedImageUri = UCrop.getOutput(data);
+                    if (croppedImageUri != null) {
+                        makeADImgRegi.setImg(croppedImageUri, strImgKind); // 수정된 코드
+                    }
+                    break;
+                case  UCrop.RESULT_ERROR:
+                    Throwable cropError = UCrop.getError(data);
+                    if (cropError != null) {
+                        cropError.printStackTrace();
+                        Toast.makeText(this, "크롭 오류 발생: " + cropError.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                    break;
                 case MakeADDetail1.REQUEST_CODE_ADDRESS:
                     makeADDetail.setAddress(data.getStringExtra("Addr"));
                     break;
@@ -562,7 +671,106 @@ public class MakeADMainActivity extends Activity implements View.OnClickListener
     }
 
     //사진 자르기
-    public void cropImage(Intent data, Uri photoUri){
+    private void cropImage(Uri sourceUri) {
+        try {
+            // 크롭 결과를 저장할 파일 생성
+            File cropFile = mSelDlg.createImageFile();
+            Uri cropUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", cropFile);
+            Uri localUri = copyUriToFile(sourceUri);
+
+            // 로그 출력
+            Log.d("Crop URI", "Source URI: " + sourceUri);
+            Log.d("Crop URI", "Local URI: " + localUri);
+            Log.d("Crop URI", "Crop URI: " + cropUri);
+
+            Intent cropIntent = new Intent("com.android.camera.action.CROP");
+            cropIntent.setDataAndType(localUri, "image/*");
+            //cropIntent.setDataAndType(sourceUri, "image/*");
+            cropIntent.putExtra("crop", "true");
+            cropIntent.putExtra("scale", true);
+            cropIntent.putExtra(MediaStore.EXTRA_OUTPUT, cropUri);
+            cropIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+            // 크롭 앱에 URI 권한 부여
+            List<ResolveInfo> resInfoList = getPackageManager().queryIntentActivities(cropIntent, PackageManager.MATCH_DEFAULT_ONLY);
+            for (ResolveInfo resolveInfo : resInfoList) {
+                String packageName = resolveInfo.activityInfo.packageName;
+
+                // URI 권한 부여 로그
+                Log.d("Grant URI Permission", "Granting permission to: " + packageName);
+                Log.d("Grant URI Permission", "Crop URI: " + cropUri);
+                Log.d("Grant URI Permission", "Local URI: " + localUri);
+                Log.d("Grant URI Permission", "SourceUri URI: " + sourceUri);
+
+                // sourceUri에 대한 권한 부여
+                grantUriPermission(packageName, localUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                //grantUriPermission(packageName, sourceUri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                // cropUri에 대한 권한 부여
+                grantUriPermission(packageName, cropUri, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            }
+
+            // 크롭 작업 실행
+            startActivityForResult(cropIntent, DlgSelImg.CROP_FROM_GALLERY);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "이미지 크롭 실패", Toast.LENGTH_SHORT).show();
+        }
+    }
+    private Uri getScopedStorageUri(Uri contentUri) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            String[] projection = {MediaStore.Images.Media._ID};
+            Cursor cursor = getContentResolver().query(contentUri, projection, null, null, null);
+            if (cursor != null && cursor.moveToFirst()) {
+                int idColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID);
+                long id = cursor.getLong(idColumn);
+                cursor.close();
+
+                return ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id);
+            }
+        }
+        return contentUri; // Fallback for Android 9 이하
+    }
+    private Uri copyUriToFile(Uri sourceUri) throws IOException {
+        // 저장할 파일 생성
+        File tempFile = mSelDlg.createImageFile();
+
+        try (InputStream inputStream = getContentResolver().openInputStream(sourceUri);
+             OutputStream outputStream = new FileOutputStream(tempFile)) {
+
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+        }
+
+        // FileProvider를 통해 content:// URI 반환
+        return FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", tempFile);
+    }
+
+    private void startCrop(Uri sourceUri) {
+        // 크롭 결과 저장 파일 생성
+        Uri destinationUri = Uri.fromFile(new File(getCacheDir(), "CroppedImage.jpg"));
+
+        // UCrop 옵션 설정
+        UCrop.Options options = new UCrop.Options();
+        options.setCompressionFormat(Bitmap.CompressFormat.JPEG);
+        options.setCompressionQuality(90);
+        options.setToolbarTitle("이미지 크롭");
+        options.setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        options.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
+        options.setActiveControlsWidgetColor(ContextCompat.getColor(this, R.color.colorAccent));
+
+        // UCrop 실행
+        UCrop.of(sourceUri, destinationUri)
+                .withAspectRatio(1, 1) // 원하는 비율 설정 (1:1)
+                .withOptions(options) // 옵션 적용
+                .start(this);
+    }
+
+ /*   public void cropImage(Intent data, Uri photoUri){
         mSelDlg.storeCropImage(true, mSelDlg.STR_SECERT_FOLDER_NAME);
 
         Uri orgphotoUri=data.getData();
@@ -579,22 +787,15 @@ public class MakeADMainActivity extends Activity implements View.OnClickListener
         intent.putExtra("aspectX", 16);
         intent.putExtra("aspectY", 9);
         intent.putExtra("scale", true);
-        //intent.putExtra("output", photoUri);
-        intent.putExtra("return-data", false);
-        //intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
-        /**
-         * getUriforFile()이 return한 content URI에 대한 접근권한을 승인하려면 grantUriPermission을 호출한다.
-         * mode_flags 파라미터의 값에 따라. 지정한 패키지에 대해 content URI를 위한 임시 접근을 승인한다.
-         * 권한은 기기가 리부팅 되거나 revokeUriPermission()을 호출하여 취소할때까지 유지.
-         *
-         */
+        intent.putExtra("output", photoUri);
+        //intent.putExtra("return-data", false);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
         startActivityForResult(intent, DlgSelImg.CROP_FROM_GALLERY);
 
     }
-
-
+ */
     @Override
     public void onDismiss(DialogInterface dialog) {
         if(mSelDlg.getDelImg()){
@@ -907,5 +1108,60 @@ public class MakeADMainActivity extends Activity implements View.OnClickListener
     protected void onPause() {
         super.onPause();
         if(llProgress!=null && llProgress.isShown()) llProgress.setVisibility(View.GONE);
+    }
+
+    private static final int REQUEST_READ_MEDIA_IMAGES = 101;
+    private static final int REQUEST_READ_EXTERNAL_STORAGE = 102; //
+    private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
+
+    private void checkCameraPermission() {
+        if (ContextCompat.checkSelfPermission(mContext,android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            // 권한이 없는 경우 권한 요청
+            ActivityCompat.requestPermissions((Activity)mContext,new String[]{android.Manifest.permission.CAMERA},CAMERA_PERMISSION_REQUEST_CODE);
+        } else {
+            // 권한이 있는 경우 카메라 앱 실행
+            //startCamera();
+        }
+    }
+
+    private void checkPermissionAndPickImage() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            // Android 13 (TIRAMISU) 이상
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_MEDIA_IMAGES}, REQUEST_READ_MEDIA_IMAGES);
+            } else {
+                //pickImageFromGallery(); // 권한이 이미 있는 경우 호출
+            }
+        } else  {
+            // Android 12 이하
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_READ_EXTERNAL_STORAGE); // 새로운 상수 사용
+            } else {
+                //pickImageFromGallery(); // 권한이 이미 있는 경우 호출
+            }
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_READ_MEDIA_IMAGES) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //pickImageFromGallery();
+            } else {
+                Toast.makeText(this, "갤러리 접근 권한이 거부되었습니다.1", Toast.LENGTH_SHORT).show();
+            }
+        } else if (requestCode == REQUEST_READ_EXTERNAL_STORAGE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //pickImageFromGallery();
+            } else {
+                Toast.makeText(this, "갤러리 접근 권한이 거부되었습니다.2", Toast.LENGTH_SHORT).show();
+            }
+        } else if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //startCamera();
+            } else {
+                Toast.makeText(this, "카메라 권한이 거부되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
