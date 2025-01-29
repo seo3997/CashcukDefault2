@@ -12,10 +12,13 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +36,7 @@ import com.cashcuk.R;
 import com.cashcuk.StaticDataInfo;
 import com.cashcuk.TitleBar;
 import com.cashcuk.common.ImageLoader;
+import com.cashcuk.common.MultipartDataTask;
 import com.cashcuk.dialog.DlgBtnActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -160,7 +164,7 @@ public class FrMakeADPreviewMain3 extends Fragment implements View.OnClickListen
     /**
      * 결과 값 받는 handler
      */
-    private Handler handler = new Handler() {
+    private Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -270,7 +274,7 @@ public class FrMakeADPreviewMain3 extends Fragment implements View.OnClickListen
      * 상세 이미지 d/p
      */
     public void SetDetailImg() {
-        new getLatLng().execute(strADAddr);
+        //new getLatLng().execute(strADAddr);
 
         strTitleImgPath = strTitleImgPath.replace("\\", "//");
         if (isChangeTitleIlmg) {
@@ -356,29 +360,30 @@ public class FrMakeADPreviewMain3 extends Fragment implements View.OnClickListen
         SharedPreferences pref = mActivity.getSharedPreferences("TokenInfo", mActivity.MODE_PRIVATE);
         final String token = pref.getString(getResources().getString(R.string.str_token), "");
 
-        HashMap<Integer, String> k_param = new HashMap<Integer, String>();
-        k_param.put(StaticDataInfo.SEND_URL, url);
-        k_param.put(StaticDataInfo.SEND_TOKEN, token);
+        HashMap<String, String> k_param = new HashMap<String, String>();
+        k_param.put(getResources().getString(R.string.str_token), token);
         if(isCostChange){
-            k_param.put(SEND_AD_CHANGE_IDX, strADIdx);
-            k_param.put(SEND_AD_CHANGE_COST, strUpCost);
+            k_param.put(STR_AD_CHANGE_IDX, strADIdx);
+            k_param.put(STR_AD_CHANGE_COST, strUpCost);
         }else {
-            k_param.put(SEND_AD_NM, strADName);
-            k_param.put(SEND_AD_INFO_MSG, strADDetail);
-            k_param.put(SEND_AD_CATEGORY, strADCategory);
-            k_param.put(SEND_AD_AMOUNT, strADAmount);
-            k_param.put(SEND_AD_SAVE_POINT, strADSavePoint);
-            k_param.put(SEND_AD_DATE_S, strADStartDate);
-            k_param.put(SEND_AD_DATE_E, strADEndDate);
-            k_param.put(SEND_AD_ADDR, strADAddr);
-            k_param.put(SEND_AD_HOMEPAGE, strHomepage);
-            k_param.put(SEND_AD_EVENT, strEvent);
-            k_param.put(SEND_AD_RECOMMENDR, strADRecommend);
-            k_param.put(SEND_AD_CHARGE, strMyCharge.replace(",", ""));
-            k_param.put(SEND_AD_STATUS, strADStatus);
-            k_param.put(SEND_AD_REJUDGED, strADIsRejudged);
+            k_param.put(STR_AD_NM, strADName);
+            k_param.put(STR_AD_INFO_MSG, strADDetail);
+            k_param.put(STR_AD_CATEGORY, strADCategory);
+            k_param.put(STR_AD_AMOUNT, strADAmount);
+            k_param.put(STR_AD_SAVE_POINT, strADSavePoint);
+            k_param.put(STR_AD_DATE_S, strADStartDate);
+            k_param.put(STR_AD_DATE_E, strADEndDate);
+            k_param.put(STR_AD_ADDR, strADAddr);
+            k_param.put(STR_AD_HOMEPAGE, strHomepage);
+            k_param.put(STR_AD_EVENT, strEvent);
+            k_param.put(STR_AD_RECOMMENDR, strADRecommend);
+            k_param.put(STR_AD_MY_CHARGE, strMyCharge.replace(",", ""));
+            if(strADStatus!=null && !strADStatus.equals("")) {
+                k_param.put(STR_AD_STATUS, strADStatus);
+            }
+            k_param.put(STR_AD_REJUDGED, strADIsRejudged);
             if (strADIdx != null && !strADIdx.equals("")) {
-                k_param.put(SEND_AD_IDX, strADIdx);
+                k_param.put(STR_AD_IDX, strADIdx);
             }
         }
 
@@ -387,14 +392,58 @@ public class FrMakeADPreviewMain3 extends Fragment implements View.OnClickListen
             strTask[i] = k_param.get(i);
         }
 
+        ArrayList<File> detailFiles = new ArrayList<>();
+        int mContentDetail = 0;
+        for (int i = 0; i < arrDetailImg.size(); i++) {
+            if (arrIsChangeDetaillmg[i]) {
+                detailFiles.add(contentDetail.get(mContentDetail++));
+            } else {
+                detailFiles.add(new File(arrDetailImg.get(i)));
+            }
+        }
+
         if(isCostChange) {
-            if(llProgress!=null && !llProgress.isShown()) llProgress.setVisibility(View.VISIBLE);
-            new ChangeAmountTask().execute(strTask);
+            //if(llProgress!=null && !llProgress.isShown()) llProgress.setVisibility(View.VISIBLE);
+            //new ChangeAmountTask().execute(strTask);
         }else{
-            new DataTask().execute(strTask);
+
+            MultipartDataTask task = new MultipartDataTask(url, k_param, contentTitle, contentThumbnail, isChangeTitleIlmg,strTitleImgPath, detailFiles, new MultipartDataTask.DataTaskCallback() {
+                @Override
+                public void onPreExecute() {
+                    if (llProgress != null && !llProgress.isShown()) llProgress.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onPostExecute(String result) {
+                    if (llProgress != null && llProgress.isShown())
+                        llProgress.setVisibility(View.GONE);
+                    if (result.trim().equals("")) {
+                        Toast.makeText(mActivity, mActivity.getResources().getString(R.string.str_ad_regi_err), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (result.equals(String.valueOf(StaticDataInfo.RESULT_CODE_200))) {
+                        Toast.makeText(mActivity, getResources().getString(R.string.str_ad_regi_success), Toast.LENGTH_SHORT).show();
+                        ((MakeADPreviewActivity) getActivity()).finishAdd();
+                    } else {
+                        Toast.makeText(mActivity, getResources().getString(R.string.str_http_error), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    if (llProgress != null && llProgress.isShown())
+                        llProgress.setVisibility(View.GONE);
+                    Toast.makeText(mActivity, getResources().getString(R.string.str_http_error), Toast.LENGTH_SHORT).show();
+                    Log.d("MultipartDataTask", "Error in DataRequest", e);
+                }
+            });
+            task.execute();
+
+            //new DataTask().execute(strTask);
         }
     }
 
+/*
     private class DataTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -495,10 +544,39 @@ public class FrMakeADPreviewMain3 extends Fragment implements View.OnClickListen
             }
         }
     }
+*/
 
-    private ContentBody contentTitle;
-    private ContentBody contentThumbnail;
-    private ArrayList<ContentBody> contentDetail;
+    private  File contentTitle;
+    private File contentThumbnail;
+    private ArrayList<File> contentDetail;
+    private void resizeImg() {
+        if (isChangeTitleIlmg) {
+            File titleFile = new File(strTitleImgPath);
+            File thumbnailFile = new File(strTitleImgPath);
+            if (titleFile.exists() && thumbnailFile.exists()) {
+                contentTitle = titleFile;
+                contentThumbnail = thumbnailFile;
+            } else {
+                Intent intent = new Intent(mActivity, DlgBtnActivity.class);
+                intent.putExtra("BtnDlgMsg", mActivity.getResources().getString(R.string.str_ad_img_err));
+                startActivity(intent);
+                return;
+            }
+        } else {
+            contentTitle = new File(strTitleImgPath);
+        }
+
+        if (arrDetailImg.size() > 0) {
+            contentDetail = new ArrayList<>();
+            for (int i = 0; i < arrDetailImg.size(); i++) {
+                File oFile = new File(arrDetailImg.get(i));
+                if (oFile.exists()) {
+                    contentDetail.add(oFile);
+                }
+            }
+        }
+    }
+/*
     private void resizeImg(){
         if(isChangeTitleIlmg) {
             ByteArrayBody bTitleImg = decodeSampledBitmapFromPath(strTitleImgPath, Integer.parseInt(mActivity.getResources().getString(R.string.str_ad_char_w)), Integer.parseInt(mActivity.getResources().getString(R.string.str_ad_h))); //광고 타이틀
@@ -529,6 +607,7 @@ public class FrMakeADPreviewMain3 extends Fragment implements View.OnClickListen
         }
 
     }
+*/
 
     /** @Author : pppdw
      * @Description : 구글 URL을 이용해 간단하게 lng.lat를 뽑는다. new HttpGet 생성자에 사용된 URL로 뽑고자하는 지역의 네임값만 날리면된다.

@@ -337,11 +337,13 @@ public class MakeADDetail1 extends LinearLayout implements View.OnClickListener 
             }
         }
 
+        /*
         if(mModifyInfo.getStrADEvent().equals(StaticDataInfo.STRING_Y)){
             rbHaveEvent.setChecked(true);
         }else{
             rbNoEvent.setChecked(true);
         }
+         */
     }
 
     View view = null;

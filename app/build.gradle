@@ -44,8 +44,10 @@ dependencies {
     implementation("com.android.volley:volley:1.2.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("com.squareup.okhttp3:okhttp:4.11.0") // 최신 버전 확인 후 사용 권장
+    implementation("com.squareup.okio:okio:3.2.0") // Okio 최신 버전 확인 후 사용
     implementation("com.vanniktech:android-image-cropper:4.6.0")
     implementation("com.github.yalantis:ucrop:2.2.8")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
 }
 
 apply plugin: 'com.google.gms.google-services'
